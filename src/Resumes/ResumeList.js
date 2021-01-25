@@ -1,30 +1,15 @@
-import { useState, useEffect } from 'react';
-import { NotificationContext, NotificationType } from '../context/notificationContext';
-import { useLocalStorage } from '../hooks';
+import { useCallback } from 'react';
+import { useLocalStorage, useHttp } from '../hooks';
 import ResumeItem from './ResumeItem';
 import { index as GetResumes } from './ResumeAPI';
 
-const ResumeList = () => {
-    const [resumes, setResumes] = useState([]);
+export const ResumeList = () => {
     const [user,] = useLocalStorage('currentUser');
+    const memoizedFn = useCallback(() => {
+        return GetResumes(user.accessToken);
+    }, [user.accessToken]);
 
-    useEffect(() => {
-        const getData = async (accessToken) => {
-
-            const { statusCode, data } = await GetResumes(accessToken);
-
-            if (statusCode !== 200) {
-                NotificationContext.setNotification({
-                    message: '',
-                    type: NotificationType.ERROR
-                });
-                return;
-            }
-            setResumes(data);
-        }
-
-        getData(user.accessToken);
-    }, [user]);
+    const resumes = useHttp(memoizedFn);
 
     return (
         <div>
@@ -34,5 +19,3 @@ const ResumeList = () => {
         </div>
     )
 }
-
-export default ResumeList;

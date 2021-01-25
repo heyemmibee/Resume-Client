@@ -1,8 +1,8 @@
-const LoginForm = ({ onChange, status }) => {
+const LoginForm = ({ form, onChange, onSubmit, status }) => {
     return (
         <form
             className='m-2.5 p-2.5 rounded-xl bg-secondary'
-            onSubmit={ }>
+            onSubmit={onSubmit}>
             <div className='pb-1'>
                 <label
                     className='text-primary font-bold'
@@ -14,7 +14,7 @@ const LoginForm = ({ onChange, status }) => {
                     required
                     id='email'
                     type='email'
-                    value={registration.email}
+                    value={form.email}
                     onChange={onChange}
                 />
             </div>
@@ -29,7 +29,7 @@ const LoginForm = ({ onChange, status }) => {
                     required
                     id='password'
                     type='password'
-                    value={registration.password}
+                    value={form.password}
                     onChange={onChange}
                 />
             </div>

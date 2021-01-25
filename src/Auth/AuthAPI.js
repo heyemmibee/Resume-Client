@@ -18,7 +18,7 @@ export const getByEmail = async (email) => {
     return await http.get(url);
 }
 
-const login = async (email, password) => {
+export const login = async (email, password) => {
     const data = {
         email,
         password

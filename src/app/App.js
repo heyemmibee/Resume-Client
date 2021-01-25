@@ -4,9 +4,11 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import { NotificationContext } from '../context/notificationContext';
 
-const Registration = lazy(() => import('../Auth'));
+import { NotificationContext } from '../context/notificationContext';
+import ProtectedRoute from './ProtectedRoute';
+const Register = lazy(() => import('../Auth/Register'));
+const Login = lazy(() => import('../Auth/Login'));
 const ResumeList = lazy(() => import('../Resumes'));
 
 function App() {
@@ -23,15 +25,18 @@ function App() {
           </div>
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
-              <Route path='/register' component={Registration} />
-              <Route path='/resumes' component={ResumeList} />
+              <Route path='/register' component={Register} />
+              <Route path='/login' component={Login} />
+              <ProtectedRoute>
+                <Route path='/resumes' component={ResumeList} />
+              </ProtectedRoute>
             </Switch>
           </Suspense>
         </main>
       </Router>
       <footer>
       </footer>
-    </div>
+    </div >
   );
 }
 

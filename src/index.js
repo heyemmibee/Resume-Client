@@ -5,11 +5,14 @@ import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 
 import { NotificationProvider } from './context/notificationContext';
+import { AuthProvider } from './context/authContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <NotificationProvider>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </NotificationProvider>
   </React.StrictMode>,
   document.getElementById('root')

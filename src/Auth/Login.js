@@ -1,25 +1,93 @@
+import { Fragment } from 'react';
 import LoginForm from './LoginForm';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { login } from './AuthAPI';
+import { NotificationContext, NotificationType } from '../context/notificationContext';
+import { AuthContext } from '../context/authContext';
+import {
+    useLocation,
+    useHistory
+} from "react-router-dom";
 
 const Login = () => {
 
-    const [login, setLogin] = useState(() => ({
-        username: '',
+    const notificationContext = useContext(NotificationContext);
+    const authContext = useContext(AuthContext);
+    const history = useHistory();
+    const location = useLocation();
+
+    const [loginData, setLoginData] = useState(() => ({
+        email: '',
         password: ''
-    }))
+    }));
+
+    const state = Object.freeze({
+        "INITIAL": "INITIAL",
+        "STARTED": "STARTED",
+        "SUCCESS": "SUCCESS",
+        "ERROR": "ERROR"
+    });
+
+    const [status, setStatus] = useState(() => ({
+        state: state.INITIAL
+    }));
 
     const fieldChanged = (e) => {
         const tempLogin = {
-            ...login,
+            ...loginData,
             [e.target.id]: e.target.value.trim()
         };
-        setLogin(tempLogin);
+
+        setLoginData(tempLogin);
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const logMeIn = async () => {
+            try {
+                setStatus({
+                    state: state.STARTED
+                });
+                const { statusCode, data } = await login(loginData.email, loginData.password);
+
+                if (statusCode !== 200) {
+                    notificationContext.setNotification({
+                        message: data.message,
+                        type: NotificationType.SUCCESS
+                    });
+                    setStatus({
+                        state: state.ERROR
+                    });
+                    return;
+                }
+                const { from } = location.state || { from: { pathname: "/resumes" } };
+                setStatus({
+                    state: state.SUCCESS
+                });
+                authContext.login(data, () => {
+                    history.replace(from);
+                });
+            } catch (err) {
+                setStatus({
+                    state: state.ERROR
+                });
+            }
+        }
+
+        logMeIn();
     }
 
     return (
-        <LoginForm
-            onChange={fieldChanged}
-        />
+        <Fragment>
+            <div className='md:w-2/4 mx-auto'>
+                <LoginForm
+                    status={status.state}
+                    form={loginData}
+                    onChange={fieldChanged}
+                    onSubmit={onSubmit}
+                />
+            </div>
+        </Fragment>
     )
 }
 

@@ -5,7 +5,8 @@ export const NotificationType = Object.freeze({
     "SUCCESS": "SUCCESS",
     "ERROR": "ERROR",
     "WARNING": "WARNING",
-    "INFORMATION": "INFORMATION"
+    "INFORMATION": "INFORMATION",
+    "LOADING": "LOADING"
 });
 
 export const NotificationContext = createContext();

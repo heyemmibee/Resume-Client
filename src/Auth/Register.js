@@ -1,14 +1,19 @@
 import { useState, useContext, Fragment } from 'react';
-import { Redirect } from 'react-router-dom';
 import RegisterForm from './RegisterForm';
 import { NotificationContext, NotificationType } from '../context/notificationContext';
 import { registerUser, getByUsername, getByEmail } from './AuthAPI';
-import { useLocalStorage } from '../hooks'
+import { AuthContext } from '../context/authContext';
+import {
+    useLocation,
+    useHistory
+} from "react-router-dom";
 
 const Registration = () => {
 
     const notificationContext = useContext(NotificationContext);
-    const [, setLocalStorage] = useLocalStorage('currentUser', '');
+    const authContext = useContext(AuthContext);
+    const history = useHistory();
+    const location = useLocation();
 
     const initialState = {
         username: '',
@@ -43,14 +48,17 @@ const Registration = () => {
                 const { statusCode, data } = await registerUser(registration);
 
                 if (statusCode === 200) {
+                    const { from } = location.state || { from: { pathname: "/resumes" } };
+                    setStatus({
+                        state: state.SUCCESS
+                    });
+                    setRegistration(initialState);
                     notificationContext.setNotification({
                         message: 'Account created successfully.',
                         type: NotificationType.SUCCESS
-                    })
-                    setLocalStorage(data);
-                    setRegistration(initialState);
-                    setStatus({
-                        state: state.SUCCESS
+                    });
+                    authContext.login(data, () => {
+                        history.replace(from);
                     });
                 } else {
                     setStatus({
@@ -106,20 +114,15 @@ const Registration = () => {
 
     return (
         <Fragment>
-            {
-                status.state === state.SUCCESS ?
-                    <Redirect to='/resumes' />
-                    :
-                    <div className='md:w-2/4 mx-auto'>
-                        <RegisterForm
-                            status={status.state}
-                            registration={registration}
-                            onClick={createUser}
-                            onChange={fieldChanged}
-                            isUsernameTaken={isUsernameTaken}
-                        />
-                    </div>
-            }
+            <div className='md:w-2/4 mx-auto'>
+                <RegisterForm
+                    status={status.state}
+                    registration={registration}
+                    onClick={createUser}
+                    onChange={fieldChanged}
+                    isUsernameTaken={isUsernameTaken}
+                />
+            </div>
         </Fragment>
     )
 }

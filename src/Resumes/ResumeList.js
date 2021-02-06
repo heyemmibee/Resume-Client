@@ -12,7 +12,7 @@ export const ResumeList = () => {
     const resumes = useHttp(memoizedFn);
 
     return (
-        <div>
+        <div className="md:flex md:items-center md:justify-between">
             <ResumeItem
                 resumes={resumes}
             />

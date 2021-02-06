@@ -10,6 +10,7 @@ import ProtectedRoute from './ProtectedRoute';
 const Register = lazy(() => import('../Auth/Register'));
 const Login = lazy(() => import('../Auth/Login'));
 const ResumeList = lazy(() => import('../Resumes'));
+const ResumeForm = lazy(() => import('../Resumes/ResumeForm'));
 
 function App() {
   const notificationContext = useContext(NotificationContext);
@@ -28,6 +29,7 @@ function App() {
               <Route path='/register' component={Register} />
               <Route path='/login' component={Login} />
               <ProtectedRoute>
+                <Route path='/resumes/new' component={ResumeForm} />
                 <Route path='/resumes' component={ResumeList} />
               </ProtectedRoute>
             </Switch>

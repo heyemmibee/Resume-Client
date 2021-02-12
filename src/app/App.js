@@ -9,7 +9,7 @@ import { NotificationContext } from '../context/notificationContext';
 import ProtectedRoute from './ProtectedRoute';
 const Register = lazy(() => import('../Auth/Register'));
 const Login = lazy(() => import('../Auth/Login'));
-const ResumeList = lazy(() => import('../Resumes'));
+const ResumeList = lazy(() => import('../Resumes/ResumeList'));
 const ResumeForm = lazy(() => import('../Resumes/ResumeForm'));
 
 function App() {

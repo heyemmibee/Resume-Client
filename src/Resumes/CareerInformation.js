@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 
 const capitalize = item => `${item.charAt(0).toUpperCase()}${item.slice(1)}`;
 
-const ResumeCareerInformation = (props) => {
+const CareerInformation = (props) => {
     return (
         <Fragment>
             {
@@ -37,4 +37,4 @@ const ResumeCareerInformation = (props) => {
     )
 }
 
-export default ResumeCareerInformation;
+export default CareerInformation;

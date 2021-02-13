@@ -1,6 +1,12 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
+import SideBar from './SideBar';
 import CareerInformation from './CareerInformation';
 import WorkExperience from './WorkExperience';
+import Talks from './Talks';
+import Certifications from './Certifications';
+import Awards from './Awards';
+import Education from './Education';
+import SideProjects from './SideProjects'
 
 const ResumeForm = () => {
 
@@ -12,6 +18,69 @@ const ResumeForm = () => {
         'to': '',
         'current': false
     };
+
+    const talk = {
+        'title': '',
+        'year': new Date().getFullYear(),
+        'event': '',
+        'url': '',
+        'summary': ''
+    };
+
+    const cert = {
+        'title': '',
+        'issuing_organization': '',
+        'credential_expires': true,
+        'issue_date': '',
+        'expiration_date': '',
+        'credential_id': '',
+        'credential_url': ''
+    };
+
+    const award = {
+        'title': '',
+        'year': new Date().getFullYear(),
+        'presented_by': '',
+        'url': '',
+        'summary': ''
+    }
+
+    const education = {
+        'school': '',
+        'degree': '',
+        'field_of_study': '',
+        'grade': '',
+        'from': '',
+        'to': '',
+        'activities_and_socities': '',
+        'graduated': false
+    }
+
+    const sideProject = {
+        'title': 'Resume',
+        'url': 'https://localhost',
+        'description': 'This is my site',
+        'year': 2021
+    }
+
+    const getObjectToAdd = key => {
+        switch (key) {
+            case 'experience':
+                return experience;
+            case 'talks':
+                return talk;
+            case 'licenses_and_certifications':
+                return cert;
+            case 'awards':
+                return award;
+            case 'education':
+                return education;
+            case 'side_projects':
+                return sideProject;
+            default:
+                return null;
+        }
+    }
 
     const [resume, setResume] = useState(() => (
         {
@@ -35,21 +104,11 @@ const ResumeForm = () => {
                 'website': ''
             },
             'experience': [],
-            'talks': [{
-
-            }],
-            'awards': [{
-
-            }],
-            'education': [{
-
-            }],
-            'licenses_and_certifications': [{
-
-            }],
-            'side_projects': [{
-
-            }]
+            'talks': [],
+            'awards': [],
+            'education': [],
+            'licenses_and_certifications': [],
+            'side_projects': []
         }
     ));
 
@@ -63,10 +122,10 @@ const ResumeForm = () => {
         });
     }
 
-    const experienceChanged = (e, indexChanged) => {
+    const componentChanged = (e, key, indexChanged) => {
         setResume({
             ...resume,
-            experience: resume.experience.map((item, index) => {
+            [key]: resume[key].map((item, index) => {
                 if (indexChanged === index) {
                     return {
                         ...item,
@@ -76,31 +135,28 @@ const ResumeForm = () => {
                 return item;
             })
         });
-        console.log(resume)
     }
 
-    const addWorkExperience = (e) => {
+    const componentAdded = (e, key) => {
         setResume({
             ...resume,
-            experience: [...resume.experience, experience]
+            [key]: [...resume[key], getObjectToAdd(key)]
         })
     }
 
-    const removeWorkExperience = (e, indexToRemove) => {
+    const componentRemoved = (e, key, indexToRemove) => {
         setResume({
             ...resume,
-            experience: resume.experience.filter((item, index) => index !== indexToRemove)
+            [key]: resume[key].filter((item, index) => index !== indexToRemove)
         })
     }
 
     return (
         <div>
             <div className='md:grid md:grid-cols-3 md:gap-6'>
-                <div className='md:col-span-1'>
-                    <div className='px-4 sm:px-0'>
-                        <h3 className='text-lg font-medium leading-6 text-gray-900'>Personal Information</h3>
-                    </div>
-                </div>
+                <SideBar
+                    title='Personal Information'
+                />
                 <div className='mt-5 md:mt-0 md:col-span-2'>
                     <form action='#' method='POST'>
                         <div className='shadow sm:rounded-md sm:overflow-hidden'>
@@ -172,14 +228,10 @@ const ResumeForm = () => {
 
             <div className='mt-10 sm:mt-0'>
                 <div className='md:grid md:grid-cols-3 md:gap-6'>
-                    <div className='md:col-span-1'>
-                        <div className='px-4 sm:px-0'>
-                            <h3 className='text-lg font-medium leading-6 text-gray-900'>Career Information</h3>
-                            <p className='mt-1 text-sm text-gray-600'>
-                                Add your career information.
-                            </p>
-                        </div>
-                    </div>
+                    <SideBar
+                        title='Career Information'
+                        subHeading='Add your career information.'
+                    />
                     <div className='mt-5 md:mt-0 md:col-span-2'>
 
                         <div className='shadow overflow-hidden sm:rounded-md'>
@@ -212,21 +264,18 @@ const ResumeForm = () => {
 
             <div className='mt-10 sm:mt-0'>
                 <div className='md:grid md:grid-cols-3 md:gap-6'>
-                    <div className='md:col-span-1'>
-                        <div className='px-4 sm:px-0'>
-                            <h3 className='text-lg font-medium leading-6 text-gray-900'>Work Experience</h3>
-                            <p className='mt-1 text-sm text-gray-600'>
-                                Add your work experience
-                            </p>
-                        </div>
-                    </div>
+                    <SideBar
+                        title='Work Experience'
+                        subHeading='Add your work experience'
+                    />
                     <div className='mt-5 md:mt-0 md:col-span-2'>
                         <div className='shadow overflow-hidden sm:rounded-md'>
                             <WorkExperience
                                 experience={resume.experience}
-                                experienceChanged={experienceChanged}
-                                removeWorkExperience={removeWorkExperience}
-                                addWorkExperience={addWorkExperience}
+                                componentChanged={componentChanged}
+                                componentRemoved={componentRemoved}
+                                componentAdded={componentAdded}
+                                resumeKey='experience'
                             />
                         </div>
                     </div>
@@ -241,85 +290,132 @@ const ResumeForm = () => {
 
             <div className='mt-10 sm:mt-0'>
                 <div className='md:grid md:grid-cols-3 md:gap-6'>
-                    <div className='md:col-span-1'>
-                        <div className='px-4 sm:px-0'>
-                            <h3 className='text-lg font-medium leading-6 text-gray-900'>Notifications</h3>
-                            <p className='mt-1 text-sm text-gray-600'>
-                                Decide which communications you'd like to receive and how.
-                            </p>
-                        </div>
-                    </div>
+                    <SideBar
+                        title='Talks'
+                        subHeading='List your presentation or talks at events'
+                    />
                     <div className='mt-5 md:mt-0 md:col-span-2'>
-
                         <div className='shadow overflow-hidden sm:rounded-md'>
-                            <div className='px-4 py-5 bg-white space-y-6 sm:p-6'>
-                                <fieldset>
-                                    <legend className='text-base font-medium text-gray-900'>By Email</legend>
-                                    <div className='mt-4 space-y-4'>
-                                        <div className='flex items-start'>
-                                            <div className='flex items-center h-5'>
-                                                <input id='comments' name='comments' type='checkbox' className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' />
-                                            </div>
-                                            <div className='ml-3 text-sm'>
-                                                <label htmlFor='comments' className='font-medium text-gray-700'>Comments</label>
-                                                <p className='text-gray-500'>Get notified when someones posts a comment on a posting.</p>
-                                            </div>
-                                        </div>
-                                        <div className='flex items-start'>
-                                            <div className='flex items-center h-5'>
-                                                <input id='candidates' name='candidates' type='checkbox' className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' />
-                                            </div>
-                                            <div className='ml-3 text-sm'>
-                                                <label htmlFor='candidates' className='font-medium text-gray-700'>Candidates</label>
-                                                <p className='text-gray-500'>Get notified when a candidate applies htmlFor a job.</p>
-                                            </div>
-                                        </div>
-                                        <div className='flex items-start'>
-                                            <div className='flex items-center h-5'>
-                                                <input id='offers' name='offers' type='checkbox' className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' />
-                                            </div>
-                                            <div className='ml-3 text-sm'>
-                                                <label htmlFor='offers' className='font-medium text-gray-700'>Offers</label>
-                                                <p className='text-gray-500'>Get notified when a candidate accepts or rejects an offer.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <fieldset>
-                                    <div>
-                                        <legend className='text-base font-medium text-gray-900'>Push Notifications</legend>
-                                        <p className='text-sm text-gray-500'>These are delivered via SMS to your mobile phone.</p>
-                                    </div>
-                                    <div className='mt-4 space-y-4'>
-                                        <div className='flex items-center'>
-                                            <input id='push_everything' name='push_notifications' type='radio' className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300' />
-                                            <label htmlFor='push_everything' className='ml-3 block text-sm font-medium text-gray-700'>
-                                                Everything
-                                                </label>
-                                        </div>
-                                        <div className='flex items-center'>
-                                            <input id='push_email' name='push_notifications' type='radio' className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300' />
-                                            <label htmlFor='push_email' className='ml-3 block text-sm font-medium text-gray-700'>
-                                                Same as email
-                                                </label>
-                                        </div>
-                                        <div className='flex items-center'>
-                                            <input id='push_nothing' name='push_notifications' type='radio' className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300' />
-                                            <label htmlFor='push_nothing' className='ml-3 block text-sm font-medium text-gray-700'>
-                                                No push notifications
-                                                </label>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
-                                <button type='submit' className='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
-                                    Save
-                                    </button>
-                            </div>
+                            <Talks
+                                talks={resume.talks}
+                                componentChanged={componentChanged}
+                                componentRemoved={componentRemoved}
+                                componentAdded={componentAdded}
+                                resumeKey='talks'
+                            />
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className='hidden sm:block' aria-hidden='true'>
+                <div className='py-5'>
+                    <div className='border-t border-gray-200'></div>
+                </div>
+            </div>
+
+            <div className='mt-10 sm:mt-0'>
+                <div className='md:grid md:grid-cols-3 md:gap-6'>
+                    <SideBar
+                        title='Licenses &amp; Certifications'
+                        subHeading='List your licenses or certifications'
+                    />
+                    <div className='mt-5 md:mt-0 md:col-span-2'>
+                        <div className='shadow overflow-hidden sm:rounded-md'>
+                            <Certifications
+                                certifications={resume.licenses_and_certifications}
+                                componentChanged={componentChanged}
+                                componentRemoved={componentRemoved}
+                                componentAdded={componentAdded}
+                                resumeKey='licenses_and_certifications'
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className='hidden sm:block' aria-hidden='true'>
+                <div className='py-5'>
+                    <div className='border-t border-gray-200'></div>
+                </div>
+            </div>
+
+            <div className='mt-10 sm:mt-0'>
+                <div className='md:grid md:grid-cols-3 md:gap-6'>
+                    <SideBar
+                        title='Awards'
+                        subHeading='List all the awards received by a company'
+                    />
+                    <div className='mt-5 md:mt-0 md:col-span-2'>
+                        <div className='shadow overflow-hidden sm:rounded-md'>
+                            <Awards
+                                awards={resume.awards}
+                                componentChanged={componentChanged}
+                                componentRemoved={componentRemoved}
+                                componentAdded={componentAdded}
+                                resumeKey='awards'
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className='hidden sm:block' aria-hidden='true'>
+                <div className='py-5'>
+                    <div className='border-t border-gray-200'></div>
+                </div>
+            </div>
+
+            <div className='mt-10 sm:mt-0'>
+                <div className='md:grid md:grid-cols-3 md:gap-6'>
+                    <SideBar
+                        title='Education'
+                        subHeading='List your education details'
+                    />
+                    <div className='mt-5 md:mt-0 md:col-span-2'>
+                        <div className='shadow overflow-hidden sm:rounded-md'>
+                            <Education
+                                education={resume.education}
+                                componentChanged={componentChanged}
+                                componentRemoved={componentRemoved}
+                                componentAdded={componentAdded}
+                                resumeKey='education'
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className='hidden sm:block' aria-hidden='true'>
+                <div className='py-5'>
+                    <div className='border-t border-gray-200'></div>
+                </div>
+            </div>
+
+            <div className='mt-10 sm:mt-0'>
+                <div className='md:grid md:grid-cols-3 md:gap-6'>
+                    <SideBar
+                        title='Side Projects'
+                        subHeading='List your side projects'
+                    />
+                    <div className='mt-5 md:mt-0 md:col-span-2'>
+                        <div className='shadow overflow-hidden sm:rounded-md'>
+                            <SideProjects
+                                side_projects={resume.side_projects}
+                                componentChanged={componentChanged}
+                                componentRemoved={componentRemoved}
+                                componentAdded={componentAdded}
+                                resumeKey='side_projects'
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
+                <button type='submit' className='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                    Save
+                </button>
             </div>
         </div>
 

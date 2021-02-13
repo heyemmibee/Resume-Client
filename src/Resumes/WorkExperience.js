@@ -18,7 +18,7 @@ const WorkExperience = (props) => {
                                     Title
                                 </label>
                                 <input
-                                    onChange={(e) => props.experienceChanged(e, index)}
+                                    onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
                                     value={item.title}
                                     type='text'
                                     name={`we_title${index}`}
@@ -35,7 +35,7 @@ const WorkExperience = (props) => {
                                     Description
                                 </label>
                                 <textarea
-                                    onChange={(e) => props.experienceChanged(e, index)}
+                                    onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
                                     value={item.description}
                                     name={`we_description${index}`}
                                     id={`we_description${index}`}
@@ -51,7 +51,7 @@ const WorkExperience = (props) => {
                                     Employment Type
                                 </label>
                                 <select
-                                    onChange={(e) => props.experienceChanged(e, index)}
+                                    onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
                                     value={props.employment_type}
                                     id={`we_employmentType${index}`}
                                     name={`we_employmentType${index}`}
@@ -70,7 +70,7 @@ const WorkExperience = (props) => {
                                     From
                                 </label>
                                 <input
-                                    onChange={(e) => props.experienceChanged(e, index)}
+                                    onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
                                     value={props.from}
                                     type='date'
                                     name={`we_from${index}`}
@@ -86,7 +86,7 @@ const WorkExperience = (props) => {
                                     To
                                 </label>
                                 <input
-                                    onChange={(e) => props.experienceChanged(e, index)}
+                                    onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
                                     value={props.to}
                                     type='date'
                                     name={`to${index}`}
@@ -96,7 +96,8 @@ const WorkExperience = (props) => {
                             </div>
                             <button
                                 className='inline-block w-6'
-                                onClick={(e) => props.removeWorkExperience(e, index)}>
+                                onClick={(e) => props.componentRemoved(e, props.resumeKey, index)}
+                            >
                                 <svg
                                     xmlns='http://www.w3.org/2000/svg'
                                     fill='none'
@@ -116,7 +117,7 @@ const WorkExperience = (props) => {
             }
             <div className='col-span-6'>
                 <button
-                    onClick={props.addWorkExperience}
+                    onClick={(e) => props.componentAdded(e, props.resumeKey)}
                     className='w-42 flex flex-row justify-between'>
                     <div
                         className='w-6'>

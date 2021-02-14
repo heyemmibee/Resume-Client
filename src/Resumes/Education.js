@@ -129,7 +129,7 @@ const Education = (props) => {
                             </label>
                             <input
                                 onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                checked={item.graduated}
+                                defaultChecked={item.graduated}
                                 type='checkbox'
                                 id={`e_graduated${index}`}
                                 name={`e_graduated${index}`}

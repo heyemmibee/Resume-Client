@@ -28,7 +28,7 @@ const CareerInformation = (props) => {
                                 id={`socialLink${index}`}
                                 value={props.links[item]}
                                 className='input-url'
-                                placeholder={`www.${item}.com`} />
+                                placeholder={`www.${item}.com/username`} />
                         </div>
                     </div>
                 ))

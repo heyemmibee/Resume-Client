@@ -11,7 +11,7 @@ const WorkExperience = (props) => {
                         key={index}
                         className='new-section'>
                         <div className='grid grid-cols-6 gap-6'>
-                            <div className='col-span-6 sm:col-span-3'>
+                            <div className='col-span-6 sm:col-span-6'>
                                 <label
                                     htmlFor={`we_title${index}`}
                                     className='lbl'>
@@ -25,6 +25,24 @@ const WorkExperience = (props) => {
                                     data-customkey='title'
                                     id={`we_title${index}`}
                                     className='input-txt'
+                                    required
+                                />
+                            </div>
+                            <div className='col-span-6 sm:col-span-3'>
+                                <label
+                                    htmlFor={`we_company${index}`}
+                                    className='lbl'>
+                                    Company
+                                </label>
+                                <input
+                                    onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
+                                    value={item.company}
+                                    type='text'
+                                    name={`we_company${index}`}
+                                    data-customkey='company'
+                                    id={`we_company${index}`}
+                                    className='input-txt'
+                                    required
                                 />
                             </div>
                             <div className='col-span-6 sm:col-span-3'>
@@ -39,25 +57,32 @@ const WorkExperience = (props) => {
                                     id={`we_employmentType${index}`}
                                     name={`we_employmentType${index}`}
                                     data-customkey='employment_type'
-                                    className='input-txt'>
-                                    <option>Full-Time</option>
-                                    <option>Part Time</option>
-                                    <option>Self Employed</option>
+                                    className='input-txt'
+                                    required>
+                                    <option>Apprenticeship</option>
+                                    <option>Contract</option>
+                                    <option>Freelance</option>
+                                    <option>Full-time</option>
+                                    <option>Internship</option>
+                                    <option>Part-time</option>
+                                    <option>Seasonal</option>
+                                    <option>Self-employed</option>
                                 </select>
                             </div>
                             <div className='col-span-6 sm:col-span-6'>
                                 <label
-                                    htmlFor={`we_description${index}`}
+                                    htmlFor={`we_responsibilities${index}`}
                                     className='lbl'>
                                     Responsibilities
                                 </label>
                                 <textarea
                                     onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                    value={item.description}
-                                    name={`we_description${index}`}
-                                    id={`we_description${index}`}
-                                    data-customkey='description'
+                                    value={item.responsibilities}
+                                    name={`we_responsibilities${index}`}
+                                    id={`we_responsibilities${index}`}
+                                    data-customkey='responsibilities'
                                     className='input-txt'
+                                    required
                                 />
                             </div>
                             <div className='col-span-6 sm:col-span-3'>
@@ -74,6 +99,7 @@ const WorkExperience = (props) => {
                                     data-customkey='from'
                                     id={`we_from${index}`}
                                     className='input-txt'
+                                    required
                                 />
                             </div>
                             <div className='col-span-6 sm:col-span-3'>

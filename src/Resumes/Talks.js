@@ -24,6 +24,7 @@ const Talks = (props) => {
                                 data-customkey='title'
                                 id={`t_title${index}`}
                                 className='input-txt'
+                                required
                             />
                         </div>
                         <div className='col-span-6 sm:col-span-3'>

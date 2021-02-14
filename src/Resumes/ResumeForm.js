@@ -7,12 +7,15 @@ import Certifications from './Certifications';
 import Awards from './Awards';
 import Education from './Education';
 import SideProjects from './SideProjects'
+import ResumeFormBorder from './ResumeFormBorder';
+import validate from './ResumeFormValidation';
 
 const ResumeForm = () => {
 
     const experience = {
         'title': '',
-        'description': '',
+        'company': '',
+        'responsibilities': '',
         'employment_type': '',
         'from': '',
         'to': '',
@@ -85,6 +88,7 @@ const ResumeForm = () => {
 
     const [resume, setResume] = useState(() => (
         {
+            'pronouns': '',
             'name': '',
             'contact': {
                 'email': '',
@@ -94,9 +98,8 @@ const ResumeForm = () => {
                 'city': '',
                 'state': ''
             },
-            'summary': '',
             'headline': '',
-            'pronouns': '',
+            'summary': '',
             'links': {
                 'dribble': '',
                 'facebook': '',
@@ -106,9 +109,9 @@ const ResumeForm = () => {
             },
             'experience': [],
             'talks': [],
+            'licenses_and_certifications': [],
             'awards': [],
             'education': [],
-            'licenses_and_certifications': [],
             'side_projects': []
         }
     ));
@@ -128,9 +131,25 @@ const ResumeForm = () => {
             ...resume,
             [key]: resume[key].map((item, index) => {
                 if (indexChanged === index) {
+                    // switch (key) {
+                    //     case 'experience':
+                    //         if (e.target.getAttribute('data-customkey') === 'to') {
+                    //             if (e.target.value.trim() === '') {
+                    //                 item.current = true;
+                    //             }
+                    //         }
+                    //         break;
+                    //     default:
+                    //         break;
+                    // }
+                    let value = e.target.value;
+                    if (e.target.type === 'checkbox') {
+                        value = e.target.checked;
+                    }
+                    console.log(value)
                     return {
                         ...item,
-                        [e.target.getAttribute('data-customkey')]: e.target.value
+                        [e.target.getAttribute('data-customkey')]: value
                     }
                 }
                 return item;
@@ -139,6 +158,7 @@ const ResumeForm = () => {
     }
 
     const componentAdded = (e, key) => {
+        e.preventDefault();
         setResume({
             ...resume,
             [key]: [...resume[key], getObjectToAdd(key)]
@@ -146,297 +166,320 @@ const ResumeForm = () => {
     }
 
     const componentRemoved = (e, key, indexToRemove) => {
+        e.preventDefault();
         setResume({
             ...resume,
             [key]: resume[key].filter((item, index) => index !== indexToRemove)
         })
     }
 
+    const objectChanged = (e, key) => {
+        setResume({
+            ...resume,
+            [key]: {
+                ...resume[key],
+                [e.target.name]: e.target.value
+            }
+        })
+    }
+
+    const createNewResume = (e) => {
+        e.preventDefault();
+        console.log(resume)
+        const validateForm = async () => {
+            const validatedResume = await validate(resume);
+            console.log(validatedResume);
+        }
+
+        validateForm();
+    }
+
     return (
-        <div>
-            <div className='md:grid md:grid-cols-3 md:gap-6 mt-4'>
-                <SideBar
-                    title='Personal Information'
-                />
-                <div className='mt-5 md:mt-0 md:col-span-2'>
-                    <form action='#' method='POST'>
+        <div className='my-10'>
+            <form onSubmit={createNewResume}>
+                <div className='md:grid md:grid-cols-3 md:gap-6'>
+                    <SideBar
+                        title='Personal Information'
+                    />
+                    <div className='mt-5 md:mt-0 md:col-span-2'>
                         <div className='shadow sm:rounded-md sm:overflow-hidden'>
                             <div className='px-4 py-5 bg-white space-y-6 sm:p-6 bg-secondary'>
                                 <div className='grid grid-cols-6 gap-6'>
                                     <div className='col-span-6 sm:col-span-3'>
                                         <label htmlFor='pronouns' className='lbl'>Pronoun</label>
                                         <input
+                                            value={resume.pronouns}
+                                            onChange={(e) => setResume({ ...resume, [e.target.name]: e.target.value })}
                                             type='text'
                                             name='pronouns'
                                             id='pronouns'
                                             className='input-txt'
+                                            placeholder='They/Them'
                                         />
                                     </div>
                                     <div className='col-span-6 sm:col-span-3'>
                                         <label htmlFor='name' className='lbl'>Name</label>
                                         <input
+                                            value={resume.name}
+                                            onChange={(e) => setResume({ ...resume, [e.target.name]: e.target.value })}
                                             type='text'
                                             name='name'
                                             id='name'
                                             autoComplete='given-name'
                                             className='input-txt'
+                                            required
                                         />
                                     </div>
                                     <div className='col-span-6 sm:col-span-3'>
                                         <label htmlFor='email' className='lbl'>Email</label>
                                         <input
+                                            value={resume.contact.email}
+                                            onChange={(e) => objectChanged(e, 'contact')}
                                             type='text'
                                             name='email'
                                             id='email'
-                                            autoComplete='given-name'
+                                            autoComplete='email'
                                             className='input-txt'
+                                            required
                                         />
                                     </div>
                                     <div className='col-span-6 sm:col-span-3'>
                                         <label htmlFor='phone' className='lbl'>Phone</label>
                                         <input
+                                            value={resume.contact.phone}
+                                            onChange={(e) => objectChanged(e, 'contact')}
                                             type='text'
                                             name='phone'
                                             id='phone'
                                             autoComplete='phone'
                                             className='input-txt'
+                                            required
                                         />
                                     </div>
                                     <div className='col-span-6 sm:col-span-3'>
                                         <label htmlFor='city' className='lbl'>City</label>
                                         <input
+                                            value={resume.location.city}
+                                            onChange={(e) => objectChanged(e, 'location')}
                                             type='text'
                                             name='city'
                                             id='city'
                                             autoComplete='city'
                                             className='input-txt'
+                                            required
                                         />
                                     </div>
                                     <div className='col-span-6 sm:col-span-3'>
                                         <label htmlFor='state' className='lbl'>State</label>
                                         <input
+                                            value={resume.location.state}
+                                            onChange={(e) => objectChanged(e, 'location')}
                                             type='text'
                                             name='state'
                                             id='state'
                                             autoComplete='state'
                                             className='input-txt'
+                                            required
                                         />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
 
-            <div className='hidden sm:block' aria-hidden='true'>
-                <div className='py-5'>
-                    <div className='border-t border-gray-200'></div>
-                </div>
-            </div>
+                <ResumeFormBorder />
 
-            <div className='mt-10 sm:mt-0'>
-                <div className='md:grid md:grid-cols-3 md:gap-6'>
-                    <SideBar
-                        title='Professional Details'
-                        subHeading='Add your professional summary.'
-                    />
-                    <div className='mt-5 md:mt-0 md:col-span-2'>
+                <div className='mt-10 sm:mt-0'>
+                    <div className='md:grid md:grid-cols-3 md:gap-6'>
+                        <SideBar
+                            title='Professional Details'
+                            subHeading='Add your professional summary.'
+                        />
+                        <div className='mt-5 md:mt-0 md:col-span-2'>
 
-                        <div className='shadow overflow-hidden sm:rounded-md'>
-                            <div className='px-4 py-5 bg-white sm:p-6 bg-secondary'>
-                                <div className='grid grid-cols-6 gap-6'>
-                                    <div className='col-span-6 sm:col-span-6'>
-                                        <label htmlFor='headline' className='lbl'>Headline</label>
-                                        <input
-                                            type='text'
-                                            name='headline'
-                                            id='headline'
-                                            className='input-txt'
+                            <div className='shadow overflow-hidden sm:rounded-md'>
+                                <div className='px-4 py-5 bg-white sm:p-6 bg-secondary'>
+                                    <div className='grid grid-cols-6 gap-6'>
+                                        <div className='col-span-6 sm:col-span-6'>
+                                            <label htmlFor='headline' className='lbl'>Headline</label>
+                                            <input
+                                                value={resume.headline}
+                                                onChange={(e) => setResume({ ...resume, [e.target.name]: e.target.value })}
+                                                type='text'
+                                                name='headline'
+                                                id='headline'
+                                                className='input-txt'
+                                                required
+                                                placeholder='Passionate full snack developer...'
+                                            />
+                                        </div>
+                                        <div className='col-span-6 sm:col-span-6'>
+                                            <label htmlFor='summary' className='lbl'>About Me</label>
+                                            <textarea
+                                                value={resume.summary}
+                                                onChange={(e) => setResume({ ...resume, [e.target.name]: e.target.value })}
+                                                name='summary'
+                                                id='summary'
+                                                className='input-txt'
+                                                required
+                                            />
+                                        </div>
+                                        <CareerInformation
+                                            links={resume.links}
+                                            socialLinkChanged={socialLinkChanged}
                                         />
                                     </div>
-                                    <div className='col-span-6 sm:col-span-6'>
-                                        <label htmlFor='summary' className='lbl'>Summary</label>
-                                        <textarea
-                                            name='summary'
-                                            id='summary'
-                                            className='input-txt'
-                                        />
-                                    </div>
-                                    <CareerInformation
-                                        links={resume.links}
-                                        socialLinkChanged={socialLinkChanged}
-                                    />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className='hidden sm:block' aria-hidden='true'>
-                <div className='py-5'>
-                    <div className='border-t border-gray-200'></div>
-                </div>
-            </div>
+                <ResumeFormBorder />
 
-            <div className='mt-10 sm:mt-0'>
-                <div className='md:grid md:grid-cols-3 md:gap-6'>
-                    <SideBar
-                        title='Work Experience'
-                        subHeading='Add your work experience'
-                    />
-                    <div className='mt-5 md:mt-0 md:col-span-2'>
-                        <div className='shadow overflow-hidden sm:rounded-md'>
-                            <WorkExperience
-                                experience={resume.experience}
-                                componentChanged={componentChanged}
-                                componentRemoved={componentRemoved}
-                                componentAdded={componentAdded}
-                                resumeKey='experience'
-                            />
+                <div className='mt-10 sm:mt-0'>
+                    <div className='md:grid md:grid-cols-3 md:gap-6'>
+                        <SideBar
+                            title='Work Experience'
+                            subHeading='Add your work experience'
+                        />
+                        <div className='mt-5 md:mt-0 md:col-span-2'>
+                            <div className='shadow overflow-hidden sm:rounded-md'>
+                                <WorkExperience
+                                    experience={resume.experience}
+                                    componentChanged={componentChanged}
+                                    componentRemoved={componentRemoved}
+                                    componentAdded={componentAdded}
+                                    resumeKey='experience'
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className='hidden sm:block' aria-hidden='true'>
-                <div className='py-5'>
-                    <div className='border-t border-gray-200'></div>
-                </div>
-            </div>
+                <ResumeFormBorder />
 
-            <div className='mt-10 sm:mt-0'>
-                <div className='md:grid md:grid-cols-3 md:gap-6'>
-                    <SideBar
-                        title='Talks'
-                        subHeading='List your presentation or talks at events or meetups'
-                    />
-                    <div className='mt-5 md:mt-0 md:col-span-2'>
-                        <div className='shadow overflow-hidden sm:rounded-md'>
-                            <Talks
-                                talks={resume.talks}
-                                componentChanged={componentChanged}
-                                componentRemoved={componentRemoved}
-                                componentAdded={componentAdded}
-                                resumeKey='talks'
-                            />
+                <div className='mt-10 sm:mt-0'>
+                    <div className='md:grid md:grid-cols-3 md:gap-6'>
+                        <SideBar
+                            title='Talks'
+                            subHeading='List your presentation or talks at events or meetups'
+                        />
+                        <div className='mt-5 md:mt-0 md:col-span-2'>
+                            <div className='shadow overflow-hidden sm:rounded-md'>
+                                <Talks
+                                    talks={resume.talks}
+                                    componentChanged={componentChanged}
+                                    componentRemoved={componentRemoved}
+                                    componentAdded={componentAdded}
+                                    resumeKey='talks'
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className='hidden sm:block' aria-hidden='true'>
-                <div className='py-5'>
-                    <div className='border-t border-gray-200'></div>
-                </div>
-            </div>
+                <ResumeFormBorder />
 
-            <div className='mt-10 sm:mt-0'>
-                <div className='md:grid md:grid-cols-3 md:gap-6'>
-                    <SideBar
-                        title='Licenses / Certifications'
-                        subHeading='List your licenses or certifications'
-                    />
-                    <div className='mt-5 md:mt-0 md:col-span-2'>
-                        <div className='shadow overflow-hidden sm:rounded-md'>
-                            <Certifications
-                                certifications={resume.licenses_and_certifications}
-                                componentChanged={componentChanged}
-                                componentRemoved={componentRemoved}
-                                componentAdded={componentAdded}
-                                resumeKey='licenses_and_certifications'
-                            />
+                <div className='mt-10 sm:mt-0'>
+                    <div className='md:grid md:grid-cols-3 md:gap-6'>
+                        <SideBar
+                            title='Licenses / Certifications'
+                            subHeading='List your licenses or certifications'
+                        />
+                        <div className='mt-5 md:mt-0 md:col-span-2'>
+                            <div className='shadow overflow-hidden sm:rounded-md'>
+                                <Certifications
+                                    certifications={resume.licenses_and_certifications}
+                                    componentChanged={componentChanged}
+                                    componentRemoved={componentRemoved}
+                                    componentAdded={componentAdded}
+                                    resumeKey='licenses_and_certifications'
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className='hidden sm:block' aria-hidden='true'>
-                <div className='py-5'>
-                    <div className='border-t border-gray-200'></div>
-                </div>
-            </div>
+                <ResumeFormBorder />
 
-            <div className='mt-10 sm:mt-0'>
-                <div className='md:grid md:grid-cols-3 md:gap-6'>
-                    <SideBar
-                        title='Awards'
-                        subHeading='List all the awards received by a company'
-                    />
-                    <div className='mt-5 md:mt-0 md:col-span-2'>
-                        <div className='shadow overflow-hidden sm:rounded-md'>
-                            <Awards
-                                awards={resume.awards}
-                                componentChanged={componentChanged}
-                                componentRemoved={componentRemoved}
-                                componentAdded={componentAdded}
-                                resumeKey='awards'
-                            />
+                <div className='mt-10 sm:mt-0'>
+                    <div className='md:grid md:grid-cols-3 md:gap-6'>
+                        <SideBar
+                            title='Awards'
+                            subHeading='List all the awards received by a company'
+                        />
+                        <div className='mt-5 md:mt-0 md:col-span-2'>
+                            <div className='shadow overflow-hidden sm:rounded-md'>
+                                <Awards
+                                    awards={resume.awards}
+                                    componentChanged={componentChanged}
+                                    componentRemoved={componentRemoved}
+                                    componentAdded={componentAdded}
+                                    resumeKey='awards'
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className='hidden sm:block' aria-hidden='true'>
-                <div className='py-5'>
-                    <div className='border-t border-gray-200'></div>
-                </div>
-            </div>
+                <ResumeFormBorder />
 
-            <div className='mt-10 sm:mt-0'>
-                <div className='md:grid md:grid-cols-3 md:gap-6'>
-                    <SideBar
-                        title='Education'
-                        subHeading='List your education details'
-                    />
-                    <div className='mt-5 md:mt-0 md:col-span-2'>
-                        <div className='shadow overflow-hidden sm:rounded-md'>
-                            <Education
-                                education={resume.education}
-                                componentChanged={componentChanged}
-                                componentRemoved={componentRemoved}
-                                componentAdded={componentAdded}
-                                resumeKey='education'
-                            />
+                <div className='mt-10 sm:mt-0'>
+                    <div className='md:grid md:grid-cols-3 md:gap-6'>
+                        <SideBar
+                            title='Education'
+                            subHeading='List your education details'
+                        />
+                        <div className='mt-5 md:mt-0 md:col-span-2'>
+                            <div className='shadow overflow-hidden sm:rounded-md'>
+                                <Education
+                                    education={resume.education}
+                                    componentChanged={componentChanged}
+                                    componentRemoved={componentRemoved}
+                                    componentAdded={componentAdded}
+                                    resumeKey='education'
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className='hidden sm:block' aria-hidden='true'>
-                <div className='py-5'>
-                    <div className='border-t border-gray-200'></div>
-                </div>
-            </div>
+                <ResumeFormBorder />
 
-            <div className='mt-10 sm:mt-0'>
-                <div className='md:grid md:grid-cols-3 md:gap-6'>
-                    <SideBar
-                        title='Side Projects'
-                        subHeading='List your side projects'
-                    />
-                    <div className='mt-5 md:mt-0 md:col-span-2'>
-                        <div className='shadow overflow-hidden sm:rounded-md'>
-                            <SideProjects
-                                side_projects={resume.side_projects}
-                                componentChanged={componentChanged}
-                                componentRemoved={componentRemoved}
-                                componentAdded={componentAdded}
-                                resumeKey='side_projects'
-                            />
+                <div className='mt-10 sm:mt-0'>
+                    <div className='md:grid md:grid-cols-3 md:gap-6'>
+                        <SideBar
+                            title='Side Projects'
+                            subHeading='List your side projects'
+                        />
+                        <div className='mt-5 md:mt-0 md:col-span-2'>
+                            <div className='shadow overflow-hidden sm:rounded-md'>
+                                <SideProjects
+                                    side_projects={resume.side_projects}
+                                    componentChanged={componentChanged}
+                                    componentRemoved={componentRemoved}
+                                    componentAdded={componentAdded}
+                                    resumeKey='side_projects'
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
-                <button type='submit' className='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
-                    Save
+                <ResumeFormBorder />
+
+                <div
+                    className='px-4 py-3 bg-gray-50 text-right sm:px-6 bg-tertiary rounded-md'>
+                    <button
+                        type='submit'
+                        className='bg-primary text-secondary inline-flex justify-center py-2 px-8  text-md font-bold rounded-md'>
+                        Save
                 </button>
-            </div>
+                </div>
+            </form>
         </div>
-
     )
 }
 

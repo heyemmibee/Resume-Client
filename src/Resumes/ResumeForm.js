@@ -57,10 +57,11 @@ const ResumeForm = () => {
     }
 
     const sideProject = {
-        'title': 'Resume',
-        'url': 'https://localhost',
-        'description': 'This is my site',
-        'year': 2021
+        'title': '',
+        'url': '',
+        'description': '',
+        'year': new Date().getFullYear(),
+        'github_url': ''
     }
 
     const getObjectToAdd = key => {
@@ -153,66 +154,74 @@ const ResumeForm = () => {
 
     return (
         <div>
-            <div className='md:grid md:grid-cols-3 md:gap-6'>
+            <div className='md:grid md:grid-cols-3 md:gap-6 mt-4'>
                 <SideBar
                     title='Personal Information'
                 />
                 <div className='mt-5 md:mt-0 md:col-span-2'>
                     <form action='#' method='POST'>
                         <div className='shadow sm:rounded-md sm:overflow-hidden'>
-                            <div className='px-4 py-5 bg-white space-y-6 sm:p-6'>
+                            <div className='px-4 py-5 bg-white space-y-6 sm:p-6 bg-secondary'>
                                 <div className='grid grid-cols-6 gap-6'>
                                     <div className='col-span-6 sm:col-span-3'>
-                                        <label htmlFor='pronoun' className='block text-sm font-medium text-gray-700'>Pronoun</label>
-                                        <input type='text' name='pronoun' id='pronoun' autoComplete='given-name' className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' />
+                                        <label htmlFor='pronouns' className='lbl'>Pronoun</label>
+                                        <input
+                                            type='text'
+                                            name='pronouns'
+                                            id='pronouns'
+                                            className='input-txt'
+                                        />
                                     </div>
                                     <div className='col-span-6 sm:col-span-3'>
-                                        <label htmlFor='name' className='block text-sm font-medium text-gray-700'>Name</label>
-                                        <input type='text' name='name' id='name' autoComplete='given-name' className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' />
+                                        <label htmlFor='name' className='lbl'>Name</label>
+                                        <input
+                                            type='text'
+                                            name='name'
+                                            id='name'
+                                            autoComplete='given-name'
+                                            className='input-txt'
+                                        />
                                     </div>
                                     <div className='col-span-6 sm:col-span-3'>
-                                        <label htmlFor='email' className='block text-sm font-medium text-gray-700'>Email</label>
-                                        <input type='text' name='email' id='email' autoComplete='given-name' className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' />
+                                        <label htmlFor='email' className='lbl'>Email</label>
+                                        <input
+                                            type='text'
+                                            name='email'
+                                            id='email'
+                                            autoComplete='given-name'
+                                            className='input-txt'
+                                        />
                                     </div>
                                     <div className='col-span-6 sm:col-span-3'>
-                                        <label htmlFor='phone' className='block text-sm font-medium text-gray-700'>Phone</label>
-                                        <input type='text' name='phone' id='phone' autoComplete='family-name' className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' />
+                                        <label htmlFor='phone' className='lbl'>Phone</label>
+                                        <input
+                                            type='text'
+                                            name='phone'
+                                            id='phone'
+                                            autoComplete='phone'
+                                            className='input-txt'
+                                        />
                                     </div>
                                     <div className='col-span-6 sm:col-span-3'>
-                                        <label htmlFor='city' className='block text-sm font-medium text-gray-700'>City</label>
-                                        <input type='text' name='city' id='city' autoComplete='given-name' className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' />
+                                        <label htmlFor='city' className='lbl'>City</label>
+                                        <input
+                                            type='text'
+                                            name='city'
+                                            id='city'
+                                            autoComplete='city'
+                                            className='input-txt'
+                                        />
                                     </div>
                                     <div className='col-span-6 sm:col-span-3'>
-                                        <label htmlFor='state' className='block text-sm font-medium text-gray-700'>State</label>
-                                        <select id='state' name='state' autoComplete='state' className='mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
-                                            <option>United States</option>
-                                            <option>Canada</option>
-                                            <option>Mexico</option>
-                                        </select>
+                                        <label htmlFor='state' className='lbl'>State</label>
+                                        <input
+                                            type='text'
+                                            name='state'
+                                            id='state'
+                                            autoComplete='state'
+                                            className='input-txt'
+                                        />
                                     </div>
-
-                                    <div className='col-span-3 sm:col-span-2'>
-                                        <label htmlFor='company_website' className='block text-sm font-medium text-gray-700'>
-                                            Website
-                                        </label>
-                                        <div className='mt-1 flex rounded-md shadow-sm'>
-                                            <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm'>
-                                                http://
-                                            </span>
-                                            <input type='text' name='company_website' id='company_website' className='focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300' placeholder='www.example.com' />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label htmlFor='about' className='block text-sm font-medium text-gray-700'>
-                                        About
-                                    </label>
-                                    <div className='mt-1'>
-                                        <textarea id='about' name='about' rows='3' className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md' placeholder='you@example.com'></textarea>
-                                    </div>
-                                    <p className='mt-2 text-sm text-gray-500'>
-                                        Brief description htmlFor your profile. URLs are hyperlinked.
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -229,21 +238,30 @@ const ResumeForm = () => {
             <div className='mt-10 sm:mt-0'>
                 <div className='md:grid md:grid-cols-3 md:gap-6'>
                     <SideBar
-                        title='Career Information'
-                        subHeading='Add your career information.'
+                        title='Professional Details'
+                        subHeading='Add your professional summary.'
                     />
                     <div className='mt-5 md:mt-0 md:col-span-2'>
 
                         <div className='shadow overflow-hidden sm:rounded-md'>
-                            <div className='px-4 py-5 bg-white sm:p-6'>
+                            <div className='px-4 py-5 bg-white sm:p-6 bg-secondary'>
                                 <div className='grid grid-cols-6 gap-6'>
-                                    <div className='col-span-6 sm:col-span-4'>
-                                        <label htmlFor='headline' className='block text-sm font-medium text-gray-700'>Headline</label>
-                                        <input type='text' name='headline' id='headline' autoComplete='email' className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' />
+                                    <div className='col-span-6 sm:col-span-6'>
+                                        <label htmlFor='headline' className='lbl'>Headline</label>
+                                        <input
+                                            type='text'
+                                            name='headline'
+                                            id='headline'
+                                            className='input-txt'
+                                        />
                                     </div>
-                                    <div className='col-span-6 sm:col-span-4'>
-                                        <label htmlFor='summary' className='block text-sm font-medium text-gray-700'>Summary</label>
-                                        <textarea name='summary' id='summary' autoComplete='email' className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' />
+                                    <div className='col-span-6 sm:col-span-6'>
+                                        <label htmlFor='summary' className='lbl'>Summary</label>
+                                        <textarea
+                                            name='summary'
+                                            id='summary'
+                                            className='input-txt'
+                                        />
                                     </div>
                                     <CareerInformation
                                         links={resume.links}
@@ -292,7 +310,7 @@ const ResumeForm = () => {
                 <div className='md:grid md:grid-cols-3 md:gap-6'>
                     <SideBar
                         title='Talks'
-                        subHeading='List your presentation or talks at events'
+                        subHeading='List your presentation or talks at events or meetups'
                     />
                     <div className='mt-5 md:mt-0 md:col-span-2'>
                         <div className='shadow overflow-hidden sm:rounded-md'>
@@ -317,7 +335,7 @@ const ResumeForm = () => {
             <div className='mt-10 sm:mt-0'>
                 <div className='md:grid md:grid-cols-3 md:gap-6'>
                     <SideBar
-                        title='Licenses &amp; Certifications'
+                        title='Licenses / Certifications'
                         subHeading='List your licenses or certifications'
                     />
                     <div className='mt-5 md:mt-0 md:col-span-2'>

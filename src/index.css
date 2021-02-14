@@ -1,6 +1,9 @@
 :root {
   --site-background-color: hsl(235, 21%, 21%);
   --orange-color: hsla(21, 100%, 85%, 1);
+  --color-one: hsla(21, 89%, 56%, 1);
+  --color-two: hsla(33, 94%, 55%, 1);
+  --red:hsla(359, 94%, 62%, 1);
 }
 
 @tailwind base;
@@ -16,4 +19,24 @@
     box-sizing: border-box;
     font-size: 16px;
   }
+}
+
+.input-txt {
+  @apply mt-1 block w-full shadow-sm sm:text-sm border py-2 px-3 rounded-md
+}
+
+.input-url {
+  @apply block w-full shadow-sm sm:text-sm border-t border-b border-r py-2 px-3 rounded-r-md
+}
+
+.lbl {
+  @apply block text-sm font-medium
+}
+
+.http-lbl {
+  @apply inline-flex items-center px-3 rounded-l-md border border-r-0 text-sm
+}
+
+.new-section {
+  @apply px-4 py-5 sm:p-6 bg-secondary border-b border-primary
 }

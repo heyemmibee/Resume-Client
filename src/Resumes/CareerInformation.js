@@ -12,13 +12,13 @@ const CareerInformation = (props) => {
                         className="col-span-6 sm:col-span-3">
                         <label
                             htmlFor={`socialLink${index}`}
-                            className="block text-sm font-medium text-gray-700">
+                            className="lbl">
                             {capitalize(item)}
                         </label>
                         <div
                             className="mt-1 flex rounded-md shadow-sm">
                             <span
-                                className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                                className='http-lbl'>
                                 http://
                             </span>
                             <input
@@ -27,7 +27,7 @@ const CareerInformation = (props) => {
                                 name={`socialLink${index}`}
                                 id={`socialLink${index}`}
                                 value={props.links[item]}
-                                className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                className='input-url'
                                 placeholder={`www.${item}.com`} />
                         </div>
                     </div>

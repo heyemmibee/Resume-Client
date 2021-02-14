@@ -14,6 +14,9 @@ module.exports = {
     colors: {
       primary: 'var(--site-background-color)',
       secondary: 'var(--orange-color)',
+      tertiary: 'var(--color-one)',
+      four: 'var(--color-two)',
+      red: 'var(--red)'
     },
     extend: {},
   },

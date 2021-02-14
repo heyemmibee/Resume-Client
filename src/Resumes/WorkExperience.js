@@ -1,3 +1,5 @@
+import AddOneButton from './AddOneButton';
+import RemoveOneButton from './RemoveOneButton';
 import { Fragment } from 'react';
 
 const WorkExperience = (props) => {
@@ -7,14 +9,12 @@ const WorkExperience = (props) => {
                 props.experience.map((item, index) => (
                     <div
                         key={index}
-                        className='px-4 py-5 bg-white sm:p-6'>
-                        <div
-                            className='grid grid-cols-6 gap-6'>
-                            <div
-                                className='col-span-6 sm:col-span-4'>
+                        className='new-section'>
+                        <div className='grid grid-cols-6 gap-6'>
+                            <div className='col-span-6 sm:col-span-3'>
                                 <label
                                     htmlFor={`we_title${index}`}
-                                    className='block text-sm font-medium text-gray-700'>
+                                    className='lbl'>
                                     Title
                                 </label>
                                 <input
@@ -24,30 +24,13 @@ const WorkExperience = (props) => {
                                     name={`we_title${index}`}
                                     data-customkey='title'
                                     id={`we_title${index}`}
-                                    className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                                    className='input-txt'
                                 />
                             </div>
-                            <div
-                                className='col-span-6 sm:col-span-4'>
-                                <label
-                                    htmlFor={`we_description${index}`}
-                                    className='block text-sm font-medium text-gray-700'>
-                                    Description
-                                </label>
-                                <textarea
-                                    onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                    value={item.description}
-                                    name={`we_description${index}`}
-                                    id={`we_description${index}`}
-                                    data-customkey='description'
-                                    className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                                />
-                            </div>
-                            <div
-                                className='col-span-6 sm:col-span-3'>
+                            <div className='col-span-6 sm:col-span-3'>
                                 <label
                                     htmlFor={`we_employmentType${index}`}
-                                    className='block text-sm font-medium text-gray-700'>
+                                    className='lbl'>
                                     Employment Type
                                 </label>
                                 <select
@@ -56,17 +39,31 @@ const WorkExperience = (props) => {
                                     id={`we_employmentType${index}`}
                                     name={`we_employmentType${index}`}
                                     data-customkey='employment_type'
-                                    className='mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
+                                    className='input-txt'>
                                     <option>Full-Time</option>
                                     <option>Part Time</option>
                                     <option>Self Employed</option>
                                 </select>
                             </div>
-                            <div
-                                className='col-span-6'>
+                            <div className='col-span-6 sm:col-span-6'>
+                                <label
+                                    htmlFor={`we_description${index}`}
+                                    className='lbl'>
+                                    Responsibilities
+                                </label>
+                                <textarea
+                                    onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
+                                    value={item.description}
+                                    name={`we_description${index}`}
+                                    id={`we_description${index}`}
+                                    data-customkey='description'
+                                    className='input-txt'
+                                />
+                            </div>
+                            <div className='col-span-6 sm:col-span-3'>
                                 <label
                                     htmlFor={`we_from${index}`}
-                                    className='block text-sm font-medium text-gray-700'>
+                                    className='lbl'>
                                     From
                                 </label>
                                 <input
@@ -76,13 +73,13 @@ const WorkExperience = (props) => {
                                     name={`we_from${index}`}
                                     data-customkey='from'
                                     id={`we_from${index}`}
-                                    className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' />
+                                    className='input-txt'
+                                />
                             </div>
-                            <div
-                                className='col-span-6 sm:col-span-6 lg:col-span-2'>
+                            <div className='col-span-6 sm:col-span-3'>
                                 <label
                                     htmlFor={`to${index}`}
-                                    className='block text-sm font-medium text-gray-700'>
+                                    className='lbl'>
                                     To
                                 </label>
                                 <input
@@ -92,51 +89,29 @@ const WorkExperience = (props) => {
                                     name={`to${index}`}
                                     id={`to${index}`}
                                     data-customkey='to'
-                                    className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' />
+                                    className='input-txt'
+                                />
+                                <p className='text-sm italic'>Leave blank if this is your current place of employment</p>
                             </div>
-                            <button
-                                className='inline-block w-6'
-                                onClick={(e) => props.componentRemoved(e, props.resumeKey, index)}
-                            >
-                                <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    fill='none'
-                                    viewBox='0 0 24 24'
-                                    stroke='currentColor'>
-                                    <path
-                                        strokeLinecap='round'
-                                        strokeLinejoin='round'
-                                        strokeWidth={2}
-                                        d='M20 12H4'
-                                    />
-                                </svg>
-                            </button>
+                            <RemoveOneButton
+                                resumeKey={props.resumeKey}
+                                componentRemoved={props.componentRemoved}
+                                title='remove work experience'
+                                className='w-56'
+                                index={index}
+                            />
                         </div>
                     </div>
+
                 ))
             }
-            <div className='col-span-6'>
-                <button
-                    onClick={(e) => props.componentAdded(e, props.resumeKey)}
-                    className='w-42 flex flex-row justify-between'>
-                    <div
-                        className='w-6'>
-                        <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            stroke='currentColor'>
-                            <path
-                                strokeLinecap='round'
-                                strokeLinejoin='round'
-                                strokeWidth='2' d='M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
-                            />
-                        </svg>
-                    </div>
-                    <div> add work experience</div>
-                </button>
-            </div >
-        </Fragment>
+            <AddOneButton
+                resumeKey={props.resumeKey}
+                componentAdded={props.componentAdded}
+                title='add work experience'
+                className='w-48'
+            />
+        </Fragment >
     )
 }
 

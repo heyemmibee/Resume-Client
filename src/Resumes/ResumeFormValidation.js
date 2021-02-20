@@ -1,6 +1,14 @@
 import Joi from 'joi';
 
 const resumeSchema = Joi.object({
+    headline: Joi.string()
+        .required()
+        .trim(),
+    summary: Joi.string()
+        .required()
+        .trim(),
+    resume_name: Joi.string()
+        .required(),
     pronouns: Joi.string()
         .required()
         .trim(),
@@ -26,12 +34,6 @@ const resumeSchema = Joi.object({
             .required()
             .trim()
     }),
-    headline: Joi.string()
-        .required()
-        .trim(),
-    summary: Joi.string()
-        .required()
-        .trim(),
     links: Joi.object({
         dribble: Joi.string().allow('').uri(),
         facebook: Joi.string().allow('').uri(),

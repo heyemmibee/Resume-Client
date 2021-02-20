@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import SideBar from './SideBar';
 import CareerInformation from './CareerInformation';
 import WorkExperience from './WorkExperience';
@@ -9,8 +9,16 @@ import Education from './Education';
 import SideProjects from './SideProjects'
 import ResumeFormBorder from './ResumeFormBorder';
 import validate from './ResumeFormValidation';
+import { AuthContext } from '../context/authContext';
+import { create } from './ResumeAPI';
+import {
+    useHistory
+} from "react-router-dom";
 
 const ResumeForm = () => {
+
+    const authContext = useContext(AuthContext);
+    const history = useHistory();
 
     const experience = {
         'title': '',
@@ -98,6 +106,7 @@ const ResumeForm = () => {
                 'city': '',
                 'state': ''
             },
+            'resume_name': '',
             'headline': '',
             'summary': '',
             'links': {
@@ -131,22 +140,11 @@ const ResumeForm = () => {
             ...resume,
             [key]: resume[key].map((item, index) => {
                 if (indexChanged === index) {
-                    // switch (key) {
-                    //     case 'experience':
-                    //         if (e.target.getAttribute('data-customkey') === 'to') {
-                    //             if (e.target.value.trim() === '') {
-                    //                 item.current = true;
-                    //             }
-                    //         }
-                    //         break;
-                    //     default:
-                    //         break;
-                    // }
                     let value = e.target.value;
                     if (e.target.type === 'checkbox') {
                         value = e.target.checked;
                     }
-                    console.log(value)
+
                     return {
                         ...item,
                         [e.target.getAttribute('data-customkey')]: value
@@ -185,101 +183,44 @@ const ResumeForm = () => {
 
     const createNewResume = (e) => {
         e.preventDefault();
-        console.log(resume)
+
         const validateForm = async () => {
             const validatedResume = await validate(resume);
-            console.log(validatedResume);
+            const { statusCode } = await create(authContext.user.accessToken, validatedResume);
+            if (statusCode === 201) {
+                history.push('/resumes');
+            }
         }
 
-        validateForm();
+        try {
+            validateForm();
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (
         <div className='my-10'>
             <form onSubmit={createNewResume}>
-                <div className='md:grid md:grid-cols-3 md:gap-6'>
-                    <SideBar
-                        title='Personal Information'
-                    />
-                    <div className='mt-5 md:mt-0 md:col-span-2'>
-                        <div className='shadow sm:rounded-md sm:overflow-hidden'>
-                            <div className='px-4 py-5 bg-white space-y-6 sm:p-6 bg-secondary'>
-                                <div className='grid grid-cols-6 gap-6'>
+                <div className='mt-10 sm:mt-0'>
+                    <div className='md:grid md:grid-cols-3 md:gap-6'>
+                        <SideBar
+                            title='Resume Details'
+                            subHeading='You can create multiple resumes which you can use for different job applications'
+                        />
+                        <div className='mt-5 md:mt-0 md:col-span-2'>
+                            <div className='shadow overflow-hidden sm:rounded-md'>
+                                <div className='px-4 py-5 bg-white space-y-6 sm:p-6 bg-secondary'>
                                     <div className='col-span-6 sm:col-span-3'>
-                                        <label htmlFor='pronouns' className='lbl'>Pronoun</label>
+                                        <label htmlFor='resume_name' className='lbl'>Resume name</label>
                                         <input
-                                            value={resume.pronouns}
+                                            value={resume.resume_name}
                                             onChange={(e) => setResume({ ...resume, [e.target.name]: e.target.value })}
                                             type='text'
-                                            name='pronouns'
-                                            id='pronouns'
+                                            name='resume_name'
+                                            id='resume_name'
                                             className='input-txt'
-                                            placeholder='They/Them'
-                                        />
-                                    </div>
-                                    <div className='col-span-6 sm:col-span-3'>
-                                        <label htmlFor='name' className='lbl'>Name</label>
-                                        <input
-                                            value={resume.name}
-                                            onChange={(e) => setResume({ ...resume, [e.target.name]: e.target.value })}
-                                            type='text'
-                                            name='name'
-                                            id='name'
-                                            autoComplete='given-name'
-                                            className='input-txt'
-                                            required
-                                        />
-                                    </div>
-                                    <div className='col-span-6 sm:col-span-3'>
-                                        <label htmlFor='email' className='lbl'>Email</label>
-                                        <input
-                                            value={resume.contact.email}
-                                            onChange={(e) => objectChanged(e, 'contact')}
-                                            type='text'
-                                            name='email'
-                                            id='email'
-                                            autoComplete='email'
-                                            className='input-txt'
-                                            required
-                                        />
-                                    </div>
-                                    <div className='col-span-6 sm:col-span-3'>
-                                        <label htmlFor='phone' className='lbl'>Phone</label>
-                                        <input
-                                            value={resume.contact.phone}
-                                            onChange={(e) => objectChanged(e, 'contact')}
-                                            type='text'
-                                            name='phone'
-                                            id='phone'
-                                            autoComplete='phone'
-                                            className='input-txt'
-                                            required
-                                        />
-                                    </div>
-                                    <div className='col-span-6 sm:col-span-3'>
-                                        <label htmlFor='city' className='lbl'>City</label>
-                                        <input
-                                            value={resume.location.city}
-                                            onChange={(e) => objectChanged(e, 'location')}
-                                            type='text'
-                                            name='city'
-                                            id='city'
-                                            autoComplete='city'
-                                            className='input-txt'
-                                            required
-                                        />
-                                    </div>
-                                    <div className='col-span-6 sm:col-span-3'>
-                                        <label htmlFor='state' className='lbl'>State</label>
-                                        <input
-                                            value={resume.location.state}
-                                            onChange={(e) => objectChanged(e, 'location')}
-                                            type='text'
-                                            name='state'
-                                            id='state'
-                                            autoComplete='state'
-                                            className='input-txt'
-                                            required
+                                            placeholder='Name this resume'
                                         />
                                     </div>
                                 </div>
@@ -289,11 +230,104 @@ const ResumeForm = () => {
                 </div>
 
                 <ResumeFormBorder />
+                <div className='mt-10 sm:mt-0'>
+                    <div className='md:grid md:grid-cols-3 md:gap-6'>
+                        <SideBar
+                            title='Personal Information'
+                        />
+                        <div className='mt-5 md:mt-0 md:col-span-2'>
+                            <div className='shadow sm:rounded-md sm:overflow-hidden'>
+                                <div className='px-4 py-5 bg-white space-y-6 sm:p-6 bg-secondary'>
+                                    <div className='grid grid-cols-6 gap-6'>
+                                        <div className='col-span-6 sm:col-span-3'>
+                                            <label htmlFor='pronouns' className='lbl'>Pronoun</label>
+                                            <input
+                                                value={resume.pronouns}
+                                                onChange={(e) => setResume({ ...resume, [e.target.name]: e.target.value })}
+                                                type='text'
+                                                name='pronouns'
+                                                id='pronouns'
+                                                className='input-txt'
+                                                placeholder='They/Them'
+                                            />
+                                        </div>
+                                        <div className='col-span-6 sm:col-span-3'>
+                                            <label htmlFor='name' className='lbl'>Name</label>
+                                            <input
+                                                value={resume.name}
+                                                onChange={(e) => setResume({ ...resume, [e.target.name]: e.target.value })}
+                                                type='text'
+                                                name='name'
+                                                id='name'
+                                                autoComplete='given-name'
+                                                className='input-txt'
+                                                required
+                                            />
+                                        </div>
+                                        <div className='col-span-6 sm:col-span-3'>
+                                            <label htmlFor='email' className='lbl'>Email</label>
+                                            <input
+                                                value={resume.contact.email}
+                                                onChange={(e) => objectChanged(e, 'contact')}
+                                                type='text'
+                                                name='email'
+                                                id='email'
+                                                autoComplete='email'
+                                                className='input-txt'
+                                                required
+                                            />
+                                        </div>
+                                        <div className='col-span-6 sm:col-span-3'>
+                                            <label htmlFor='phone' className='lbl'>Phone</label>
+                                            <input
+                                                value={resume.contact.phone}
+                                                onChange={(e) => objectChanged(e, 'contact')}
+                                                type='text'
+                                                name='phone'
+                                                id='phone'
+                                                autoComplete='phone'
+                                                className='input-txt'
+                                                required
+                                            />
+                                        </div>
+                                        <div className='col-span-6 sm:col-span-3'>
+                                            <label htmlFor='city' className='lbl'>City</label>
+                                            <input
+                                                value={resume.location.city}
+                                                onChange={(e) => objectChanged(e, 'location')}
+                                                type='text'
+                                                name='city'
+                                                id='city'
+                                                autoComplete='city'
+                                                className='input-txt'
+                                                required
+                                            />
+                                        </div>
+                                        <div className='col-span-6 sm:col-span-3'>
+                                            <label htmlFor='state' className='lbl'>State</label>
+                                            <input
+                                                value={resume.location.state}
+                                                onChange={(e) => objectChanged(e, 'location')}
+                                                type='text'
+                                                name='state'
+                                                id='state'
+                                                autoComplete='state'
+                                                className='input-txt'
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ResumeFormBorder />
 
                 <div className='mt-10 sm:mt-0'>
                     <div className='md:grid md:grid-cols-3 md:gap-6'>
                         <SideBar
-                            title='Professional Details'
+                            title='Professional Summary'
                             subHeading='Add your professional summary.'
                         />
                         <div className='mt-5 md:mt-0 md:col-span-2'>

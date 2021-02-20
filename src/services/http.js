@@ -33,9 +33,15 @@ export const post = async (endpoint, data, options = {
     const url = completeEndPoint(endpoint);
     const requestOptions = createPayloadFromOptions(data, options);
     const response = await fetch(url, requestOptions);
-    const responseData = await response.json();
+    if (response.status === 200 || response.status === 500) {
+        const responseData = await response.json();
+        return {
+            statusCode: response.status,
+            data: responseData
+        };
+    }
+
     return {
-        statusCode: response.status,
-        data: responseData
-    };
+        statusCode: response.status
+    }
 }

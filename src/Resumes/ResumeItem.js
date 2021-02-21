@@ -9,7 +9,7 @@ const ResumeItem = (props) => {
                 className="flex-1 min-w-0">
                 <h3
                     className='text-xl font-bold leading-7 text-gray-900 sm:text-2xl sm:truncate'>
-                    {item.name}
+                    {item.resume_name}
                 </h3>
             </div>
             <div

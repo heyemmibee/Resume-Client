@@ -233,6 +233,7 @@ const ResumeForm = () => {
                                             id='resume_name'
                                             className='input-txt'
                                             placeholder='Name this resume'
+                                            required
                                         />
                                     </div>
                                 </div>

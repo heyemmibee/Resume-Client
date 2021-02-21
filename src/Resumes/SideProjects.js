@@ -90,16 +90,16 @@ const SideProjects = (props) => {
                         </div>
                         <div className='col-span-6 sm:col-span-6'>
                             <label
-                                htmlFor={`sp_description${index}`}
+                                htmlFor={`sp_summary${index}`}
                                 className='lbl'>
-                                Description
+                                Summary
                             </label>
                             <textarea
                                 onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                value={item.description}
-                                name={`sp_description${index}`}
-                                id={`sp_description${index}`}
-                                data-customkey='description'
+                                value={item.summary}
+                                name={`sp_summary${index}`}
+                                id={`sp_summary${index}`}
+                                data-customkey='summary'
                                 className='input-txt'
                             />
                         </div>

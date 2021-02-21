@@ -4,7 +4,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
 import { NotificationContext } from '../context/notificationContext';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -23,6 +24,12 @@ const ResumeList = lazy(() => import('../Resumes').then(module => ({
 const ResumeForm = lazy(() => import('../Resumes').then(module => ({
   default: module.ResumeForm
 })));
+
+const Resume = lazy(() => import('../Resumes').then(module => ({
+  default: module.Resume
+})));
+
+library.add(fab)
 
 function App() {
   const notificationContext = useContext(NotificationContext);
@@ -46,6 +53,7 @@ function App() {
               <Route path='/login' component={Login} />
               <ProtectedRoute path='/resumes/:id/edit' component={ResumeForm} />
               <ProtectedRoute path='/resumes/new' component={ResumeForm} />
+              <ProtectedRoute path='/resumes/:id' component={Resume} />
               <ProtectedRoute path='/resumes' component={ResumeList} />
             </Switch>
           </Suspense>

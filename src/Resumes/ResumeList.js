@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useLocalStorage, useHttp } from '../hooks';
-import ResumeItem from './ResumeItem';
+import ResumeListItem from './ResumeListItem';
 import { index as GetResumes } from './ResumeAPI';
 
 const ResumeList = () => {
@@ -12,7 +12,7 @@ const ResumeList = () => {
     const resumes = useHttp(memoizedFn, []);
 
     return (
-        <ResumeItem
+        <ResumeListItem
             resumes={resumes}
         />
     )

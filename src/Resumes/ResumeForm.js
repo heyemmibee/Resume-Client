@@ -72,7 +72,7 @@ const ResumeForm = () => {
     const sideProject = {
         'title': '',
         'url': '',
-        'description': '',
+        'summary': '',
         'year': new Date().getFullYear(),
         'github_url': ''
     };
@@ -109,7 +109,6 @@ const ResumeForm = () => {
         },
         'resume_name': '',
         'headline': '',
-        'summary': '',
         'links': {
             'dribble': '',
             'facebook': '',
@@ -131,7 +130,6 @@ const ResumeForm = () => {
     const resumeEditObj = useHttp(memoizedFn, resume);
 
     useEffect(() => {
-        console.log(resumeEditObj)
         if (id !== undefined) {
             setResume(resumeEditObj);
         }
@@ -359,17 +357,6 @@ const ResumeForm = () => {
                                                 className='input-txt'
                                                 required
                                                 placeholder='Passionate full snack developer...'
-                                            />
-                                        </div>
-                                        <div className='col-span-6 sm:col-span-6'>
-                                            <label htmlFor='summary' className='lbl'>About Me</label>
-                                            <textarea
-                                                value={resume.summary}
-                                                onChange={(e) => setResume({ ...resume, [e.target.name]: e.target.value })}
-                                                name='summary'
-                                                id='summary'
-                                                className='input-txt'
-                                                required
                                             />
                                         </div>
                                         <CareerInformation

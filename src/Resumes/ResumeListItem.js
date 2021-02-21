@@ -1,16 +1,17 @@
 import { Fragment } from 'react';
 
-const ResumeItem = (props) => {
+const ResumeListItem = (props) => {
     const resumes = props.resumes.map((item) => (
         <div
             className="md:flex md:items-center md:justify-between md:w-3/4 mx-auto bg-secondary rounded-xl p-6 m-6"
             key={item._id}>
             <div
                 className="flex-1 min-w-0">
-                <h3
+                <a
+                    href={`/resumes/${item._id}`}
                     className='text-xl font-bold leading-7 text-gray-900 sm:text-2xl sm:truncate'>
                     {item.resume_name}
-                </h3>
+                </a>
             </div>
             <div
                 className='mt-5 flex md:mt-0 md:ml-4'>
@@ -43,4 +44,4 @@ const ResumeItem = (props) => {
     )
 }
 
-export default ResumeItem;
+export default ResumeListItem;

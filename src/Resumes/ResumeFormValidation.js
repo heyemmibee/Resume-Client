@@ -4,9 +4,6 @@ const resumeSchema = Joi.object({
     headline: Joi.string()
         .required()
         .trim(),
-    summary: Joi.string()
-        .required()
-        .trim(),
     resume_name: Joi.string()
         .required(),
     pronouns: Joi.string()
@@ -120,7 +117,7 @@ const resumeSchema = Joi.object({
         Joi.object({
             title: Joi.string(),
             url: Joi.string().uri(),
-            description: Joi.string(),
+            summary: Joi.string(),
             year: Joi.number()
                 .positive()
                 .integer()

@@ -1,5 +1,5 @@
 :root {
-  --site-background-color: hsl(235, 21%, 21%);
+  --site-background-color: hsla(235, 21%, 21%, 1);
   --orange-color: hsla(21, 100%, 85%, 1);
   --color-one: hsla(21, 89%, 56%, 1);
   --color-two: hsla(33, 94%, 55%, 1);

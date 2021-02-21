@@ -18,6 +18,14 @@ export const getByEmail = async (email) => {
     return await http.get(url);
 }
 
+export const isUsernameAvailable = async (username) => {
+    return await http.post('/users/isavailable', { username });
+}
+
+export const isEmailAvailable = async (email) => {
+    return await http.post('/users/isavailable', { email });
+}
+
 export const login = async (email, password) => {
     const data = {
         email,

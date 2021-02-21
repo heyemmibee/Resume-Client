@@ -1,1 +1,2 @@
-export { ResumeList as default } from './ResumeList';
+export { default as ResumeList } from './ResumeList';
+export { default as ResumeForm } from './ResumeForm';

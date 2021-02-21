@@ -16,7 +16,8 @@ module.exports = {
       secondary: 'var(--orange-color)',
       tertiary: 'var(--color-one)',
       four: 'var(--color-two)',
-      red: 'var(--red)'
+      red: 'var(--red)',
+      error: 'var(--red)',
     },
     extend: {},
   },

@@ -4,6 +4,10 @@ export const index = async (accessToken) => {
     return await http.get('/resumes', accessToken);
 };
 
+export const get = async (accessToken, id) => {
+    return await http.get(`/resumes/${id}`, accessToken);
+}
+
 export const create = async (accessToken, resume) => {
     return await http.post('/resumes', resume, {
         method: 'POST',

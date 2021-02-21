@@ -9,7 +9,7 @@ const ResumeList = () => {
         return GetResumes(user.accessToken);
     }, [user.accessToken]);
 
-    const resumes = useHttp(memoizedFn);
+    const resumes = useHttp(memoizedFn, []);
 
     return (
         <ResumeItem

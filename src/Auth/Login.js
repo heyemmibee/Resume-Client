@@ -61,6 +61,7 @@ const Login = () => {
                     return;
                 }
                 const { from } = location.state || { from: { pathname: "/resumes" } };
+                notificationContext.clearNotification();
                 setStatus({
                     state: state.SUCCESS
                 });
@@ -68,6 +69,10 @@ const Login = () => {
                     history.replace(from);
                 });
             } catch (err) {
+                notificationContext.setNotification({
+                    message: 'There was an error',
+                    type: NotificationType.ERROR
+                });
                 setStatus({
                     state: state.ERROR
                 });

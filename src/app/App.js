@@ -7,10 +7,22 @@ import {
 
 import { NotificationContext } from '../context/notificationContext';
 import ProtectedRoute from './ProtectedRoute';
-const Register = lazy(() => import('../Auth/Register'));
-const Login = lazy(() => import('../Auth/Login'));
-const ResumeList = lazy(() => import('../Resumes/ResumeList'));
-const ResumeForm = lazy(() => import('../Resumes/ResumeForm'));
+
+const Login = lazy(() => import('../Auth').then(module => ({
+  default: module.Login
+})));
+
+const Register = lazy(() => import('../Auth').then(module => ({
+  default: module.Register
+})));
+
+const ResumeList = lazy(() => import('../Resumes').then(module => ({
+  default: module.ResumeList
+})));
+
+const ResumeForm = lazy(() => import('../Resumes').then(module => ({
+  default: module.ResumeForm
+})));
 
 function App() {
   const notificationContext = useContext(NotificationContext);
@@ -21,24 +33,27 @@ function App() {
         <header>
         </header>
         <main>
-          <div>
-            {notificationContext.notification.message}
-          </div>
+          {notificationContext.notification.message.length !== 0 &&
+            <div className='md:w-2/4 mx-auto'>
+              <div className='rounded-xl bg-secondary text-center m-2.5 p-2.5 text-red bg-white'>
+                {notificationContext.notification.message}
+              </div>
+            </div>
+          }
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
               <Route path='/register' component={Register} />
               <Route path='/login' component={Login} />
-              <ProtectedRoute>
-                <Route path='/resumes/new' component={ResumeForm} />
-                <Route path='/resumes' component={ResumeList} />
-              </ProtectedRoute>
+              <ProtectedRoute path='/resumes/:id/edit' component={ResumeForm} />
+              <ProtectedRoute path='/resumes/new' component={ResumeForm} />
+              <ProtectedRoute path='/resumes' component={ResumeList} />
             </Switch>
           </Suspense>
         </main>
       </Router>
       <footer>
       </footer>
-    </div >
+    </div>
   );
 }
 

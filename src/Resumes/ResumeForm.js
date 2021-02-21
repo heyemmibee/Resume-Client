@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useEffect, useState, useContext, useCallback } from 'react';
 import SideBar from './SideBar';
 import CareerInformation from './CareerInformation';
 import WorkExperience from './WorkExperience';
@@ -11,14 +11,16 @@ import ResumeFormBorder from './ResumeFormBorder';
 import validate from './ResumeFormValidation';
 import { AuthContext } from '../context/authContext';
 import { create } from './ResumeAPI';
-import {
-    useHistory
-} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useHttp } from '../hooks';
+import { useParams } from "react-router-dom";
+import { get as GetResume } from './ResumeAPI';
 
 const ResumeForm = () => {
 
     const authContext = useContext(AuthContext);
     const history = useHistory();
+    const { id } = useParams();
 
     const experience = {
         'title': '',
@@ -54,7 +56,7 @@ const ResumeForm = () => {
         'presented_by': '',
         'url': '',
         'summary': ''
-    }
+    };
 
     const education = {
         'school': '',
@@ -65,7 +67,7 @@ const ResumeForm = () => {
         'to': '',
         'activities_and_socities': '',
         'graduated': false
-    }
+    };
 
     const sideProject = {
         'title': '',
@@ -73,7 +75,7 @@ const ResumeForm = () => {
         'description': '',
         'year': new Date().getFullYear(),
         'github_url': ''
-    }
+    };
 
     const getObjectToAdd = key => {
         switch (key) {
@@ -94,36 +96,46 @@ const ResumeForm = () => {
         }
     }
 
-    const [resume, setResume] = useState(() => (
-        {
-            'pronouns': '',
-            'name': '',
-            'contact': {
-                'email': '',
-                'phone': ''
-            },
-            'location': {
-                'city': '',
-                'state': ''
-            },
-            'resume_name': '',
-            'headline': '',
-            'summary': '',
-            'links': {
-                'dribble': '',
-                'facebook': '',
-                'github': '',
-                'twitter': '',
-                'website': ''
-            },
-            'experience': [],
-            'talks': [],
-            'licenses_and_certifications': [],
-            'awards': [],
-            'education': [],
-            'side_projects': []
+    const [resume, setResume] = useState(() => ({
+        'pronouns': '',
+        'name': '',
+        'contact': {
+            'email': '',
+            'phone': ''
+        },
+        'location': {
+            'city': '',
+            'state': ''
+        },
+        'resume_name': '',
+        'headline': '',
+        'summary': '',
+        'links': {
+            'dribble': '',
+            'facebook': '',
+            'github': '',
+            'twitter': '',
+            'website': ''
+        },
+        'experience': [],
+        'talks': [],
+        'licenses_and_certifications': [],
+        'awards': [],
+        'education': [],
+        'side_projects': []
+    }));
+
+    const memoizedFn = useCallback(() => {
+        return GetResume(authContext.user.accessToken, id);
+    }, [authContext.user.accessToken, id]);
+    const resumeEditObj = useHttp(memoizedFn, resume);
+
+    useEffect(() => {
+        console.log(resumeEditObj)
+        if (id !== undefined) {
+            setResume(resumeEditObj);
         }
-    ));
+    }, [id, resumeEditObj]);
 
     const socialLinkChanged = (e, key) => {
         setResume({

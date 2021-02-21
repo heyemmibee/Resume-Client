@@ -12,16 +12,22 @@ export const NotificationType = Object.freeze({
 export const NotificationContext = createContext();
 
 export const NotificationProvider = ({ children }) => {
-    const [notification, setNotification] = useState(() => ({
+    const initialNotification = {
         message: '',
         type: NotificationType.NONE
-    }));
+    };
+    const [notification, setNotification] = useState(() => initialNotification);
+
+    const clearNotification = () => {
+        setNotification(initialNotification)
+    }
 
     return (
         <NotificationContext.Provider
             value={{
                 notification,
                 setNotification,
+                clearNotification,
                 NotificationType
             }}>
             {children}

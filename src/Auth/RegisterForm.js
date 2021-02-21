@@ -1,25 +1,46 @@
-const RegisterForm = ({ onClick, registration, onChange, isUsernameTaken, status }) => {
+const RegisterForm = ({ onClick, registration, onChange, isTaken, status, uniqueError }) => {
+
+    const usernameOptions = {};
+    const emailOptions = {};
+
+    if (uniqueError.username.length !== 0) {
+        usernameOptions['aria-describedby'] = 'errUsername';
+        usernameOptions['aria-invalid'] = true;
+    }
+
+    if (uniqueError.email.length !== 0) {
+        emailOptions['aria-describedby'] = 'errEmail';
+        emailOptions['aria-invalid'] = true;
+    }
+
     return (
         <form
             className='m-2.5 p-2.5 rounded-xl bg-secondary'
             onSubmit={onClick}>
             <div className='pb-1'>
+
                 <label
                     className='text-primary font-bold'
                     htmlFor='username'>
                     Username
                 </label>
                 <input
-                    className='w-full'
+                    className={`w-full ${uniqueError.username.length !== 0 ? 'border-2 border-error' : ''}`}
                     required
                     minLength='3'
                     maxLength='14'
                     id='username'
+                    name='username'
                     type='text'
                     value={registration.username}
                     onChange={onChange}
-                    onBlur={isUsernameTaken}
+                    onBlur={isTaken}
+                    {...usernameOptions}
                 />
+                {uniqueError.username.length !== 0 &&
+                    <span
+                        className='text-error font-bold'
+                        id={usernameOptions['aria-describedby']}>{uniqueError.username}</span>}
             </div>
             <div className='pb-1'>
                 <label
@@ -28,13 +49,20 @@ const RegisterForm = ({ onClick, registration, onChange, isUsernameTaken, status
                     Email
                 </label>
                 <input
-                    className='w-full'
+                    className={`w-full ${uniqueError.email.length !== 0 ? 'border-2 border-error' : ''}`}
                     required
                     id='email'
+                    name='email'
                     type='email'
                     value={registration.email}
                     onChange={onChange}
+                    onBlur={isTaken}
+                    {...emailOptions}
                 />
+                {uniqueError.email.length !== 0 &&
+                    <span
+                        className='text-error font-bold'
+                        id={emailOptions['aria-describedby']}>{uniqueError.email}</span>}
             </div>
             <div className='pb-1'>
                 <label
@@ -46,6 +74,7 @@ const RegisterForm = ({ onClick, registration, onChange, isUsernameTaken, status
                     className='w-full'
                     required
                     id='password'
+                    name='password'
                     type='password'
                     value={registration.password}
                     onChange={onChange}
@@ -61,6 +90,7 @@ const RegisterForm = ({ onClick, registration, onChange, isUsernameTaken, status
                     className='w-full'
                     required
                     id='password_confirmation'
+                    name='password_confirmation'
                     type='password'
                     value={registration.password_confirmation}
                     onChange={onChange}

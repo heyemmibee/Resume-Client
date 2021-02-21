@@ -1,25 +1,22 @@
 import {
     Route,
-    Redirect
+    Redirect, useLocation
 } from "react-router-dom";
 import { useLocalStorage } from '../hooks';
 
-const ProtectedRoute = ({ children, ...rest }) => {
+const ProtectedRoute = ({ component: Component, ...rest }) => {
     const [localStorage,] = useLocalStorage('currentUser', '');
-    const renderComponent = children.filter(item => item.props.path === rest.location.pathname)
+    const location = useLocation();
 
     return (
         <Route
-            {...rest}
-            render={({ location }) =>
-                localStorage.accessToken !== '' ? renderComponent : (<Redirect
-                    to={{
-                        pathname: "/login",
-                        state: { from: location }
-                    }}
-                />)
-            }
-        />
+            {...rest}>
+            {localStorage.accessToken !== '' ? (
+                <Component />
+            ) : (
+                    <Redirect to={{ pathname: '/login', state: { from: location } }} />
+                )}
+        </Route>
     )
 }
 

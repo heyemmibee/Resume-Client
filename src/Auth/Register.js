@@ -1,7 +1,7 @@
 import { useState, useContext, Fragment } from 'react';
 import RegisterForm from './RegisterForm';
 import { NotificationContext, NotificationType } from '../context/notificationContext';
-import { registerUser, getByUsername, getByEmail } from './AuthAPI';
+import { registerUser, isUsernameAvailable, isEmailAvailable } from './AuthAPI';
 import { AuthContext } from '../context/authContext';
 import {
     useLocation,
@@ -31,6 +31,10 @@ const Registration = () => {
     });
 
     const [registration, setRegistration] = useState(() => initialState);
+    const [uniqueError, setUniqueError] = useState(() => ({
+        email: '',
+        username: ''
+    }));
 
     const [status, setStatus] = useState(() => ({
         state: state.INITIAL
@@ -87,21 +91,15 @@ const Registration = () => {
         setRegistration(tempRegistration);
     }
 
-    const isUsernameTaken = (e) => {
-
-        const checkUsername = async () => {
+    const isTaken = (e) => {
+        const checkUsername = async (fn) => {
             try {
-                const { statusCode } = await getByUsername(e.target.value.trim());
-                if (statusCode === 200) {
-                    notificationContext.setNotification({
-                        message: 'Username is taken!',
-                        type: NotificationType.ERROR
-                    })
-                }
+                const { statusCode } = await fn();
+                setUniqueError({
+                    ...uniqueError,
+                    [e.target.id]: statusCode === 200 ? `${e.target.id} is taken` : ''
+                })
             } catch (err) {
-                setStatus({
-                    state: state.ERROR
-                });
                 notificationContext.setNotification({
                     message: err.message,
                     type: NotificationType.ERROR
@@ -109,7 +107,10 @@ const Registration = () => {
             }
         }
 
-        checkUsername();
+        if (e.target.id === 'email')
+            checkUsername(() => isEmailAvailable(e.target.value));
+        else
+            checkUsername(() => isUsernameAvailable(e.target.value));
     }
 
     return (
@@ -120,7 +121,8 @@ const Registration = () => {
                     registration={registration}
                     onClick={createUser}
                     onChange={fieldChanged}
-                    isUsernameTaken={isUsernameTaken}
+                    isTaken={isTaken}
+                    uniqueError={uniqueError}
                 />
             </div>
         </Fragment>

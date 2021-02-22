@@ -1,8 +1,10 @@
 import AddOneButton from './AddOneButton';
 import RemoveOneButton from './RemoveOneButton';
 import { Fragment } from 'react';
+import { formatDate } from '../Common/functions';
 
 const WorkExperience = (props) => {
+
     return (
         <Fragment>
             {
@@ -53,20 +55,20 @@ const WorkExperience = (props) => {
                                 </label>
                                 <select
                                     onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                    value={props.employment_type}
+                                    value={item.employment_type}
                                     id={`we_employmentType${index}`}
                                     name={`we_employmentType${index}`}
                                     data-customkey='employment_type'
                                     className='input-txt'
                                     required>
-                                    <option>Apprenticeship</option>
-                                    <option>Contract</option>
-                                    <option>Freelance</option>
-                                    <option>Full-time</option>
-                                    <option>Internship</option>
-                                    <option>Part-time</option>
-                                    <option>Seasonal</option>
-                                    <option>Self-employed</option>
+                                    <option value='Apprenticeship'>Apprenticeship</option>
+                                    <option value='Contract'>Contract</option>
+                                    <option value='Freelance'>Freelance</option>
+                                    <option value='Full-time'>Full-time</option>
+                                    <option value='Internship'>Internship</option>
+                                    <option value='Part-time'>Part-time</option>
+                                    <option value='Seasonal'>Seasonal</option>
+                                    <option value='Self-employed'>Self-employed</option>
                                 </select>
                             </div>
                             <div className='col-span-6 sm:col-span-6'>
@@ -93,7 +95,7 @@ const WorkExperience = (props) => {
                                 </label>
                                 <input
                                     onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                    value={props.from}
+                                    value={item.from}
                                     type='date'
                                     name={`we_from${index}`}
                                     data-customkey='from'
@@ -110,7 +112,7 @@ const WorkExperience = (props) => {
                                 </label>
                                 <input
                                     onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                    value={props.to}
+                                    value={item.to}
                                     type='date'
                                     name={`to${index}`}
                                     id={`to${index}`}

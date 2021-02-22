@@ -10,11 +10,10 @@ import SideProjects from './SideProjects'
 import ResumeFormBorder from './ResumeFormBorder';
 import validate from './ResumeFormValidation';
 import { AuthContext } from '../context/authContext';
-import { create } from './ResumeAPI';
 import { useHistory } from "react-router-dom";
 import { useHttp } from '../hooks';
 import { useParams } from "react-router-dom";
-import { get as GetResume } from './ResumeAPI';
+import { get as GetResume, create, update } from './ResumeAPI';
 
 const ResumeForm = () => {
 
@@ -131,7 +130,10 @@ const ResumeForm = () => {
 
     useEffect(() => {
         if (id !== undefined) {
-            setResume(resumeEditObj);
+            const { _id, ...newResume } = {
+                ...resumeEditObj
+            }
+            setResume(newResume);
         }
     }, [id, resumeEditObj]);
 
@@ -195,10 +197,19 @@ const ResumeForm = () => {
         e.preventDefault();
 
         const validateForm = async () => {
+
+            const executeFunction = async (fn) => {
+                const { statusCode } = await fn();
+                if (statusCode === 201) {
+                    history.push('/resumes');
+                }
+            }
+
             const validatedResume = await validate(resume);
-            const { statusCode } = await create(authContext.user.accessToken, validatedResume);
-            if (statusCode === 201) {
-                history.push('/resumes');
+            if (id === undefined) {
+                executeFunction(() => create(authContext.user.accessToken, validatedResume));
+            } else {
+                executeFunction(() => update(authContext.user.accessToken, id, validatedResume));
             }
         }
 

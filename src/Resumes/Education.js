@@ -82,7 +82,7 @@ const Education = (props) => {
                             </label>
                             <input
                                 onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                value={item.from}
+                                value={(new Date(item.from)).toString() === 'Invalid Date' ? item.from : (new Date(item.from)).toISOString().substr(0, 10)}
                                 type='date'
                                 name={`e_from${index}`}
                                 id={`e_from${index}`}
@@ -98,7 +98,7 @@ const Education = (props) => {
                             </label>
                             <input
                                 onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                value={item.to}
+                                value={(new Date(item.to)).toString() === 'Invalid Date' ? item.to : (new Date(item.to)).toISOString().substr(0, 10)}
                                 type='date'
                                 name={`e_to${index}`}
                                 id={`e_to${index}`}

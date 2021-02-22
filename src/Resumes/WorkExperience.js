@@ -95,7 +95,7 @@ const WorkExperience = (props) => {
                                 </label>
                                 <input
                                     onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                    value={item.from}
+                                    value={(new Date(item.from)).toString() === 'Invalid Date' ? item.from : (new Date(item.from)).toISOString().substr(0, 10)}
                                     type='date'
                                     name={`we_from${index}`}
                                     data-customkey='from'
@@ -112,7 +112,7 @@ const WorkExperience = (props) => {
                                 </label>
                                 <input
                                     onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                    value={item.to}
+                                    value={(new Date(item.to)).toString() === 'Invalid Date' ? item.to : (new Date(item.to)).toISOString().substr(0, 10)}
                                     type='date'
                                     name={`to${index}`}
                                     id={`to${index}`}

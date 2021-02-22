@@ -89,7 +89,7 @@ const Certifications = (props) => {
                             </label>
                             <input
                                 onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                value={item.issue_date}
+                                value={(new Date(item.issue_date)).toString() === 'Invalid Date' ? item.issue_date : (new Date(item.issue_date)).toISOString().substr(0, 10)}
                                 type='date'
                                 name={`lc_issue_date${index}`}
                                 id={`lc_issue_date${index}`}
@@ -105,7 +105,7 @@ const Certifications = (props) => {
                             </label>
                             <input
                                 onChange={(e) => props.componentChanged(e, props.resumeKey, index)}
-                                value={item.expiration_date}
+                                value={(new Date(item.expiration_date)).toString() === 'Invalid Date' ? item.expiration_date : (new Date(item.expiration_date)).toISOString().substr(0, 10)}
                                 type='date'
                                 name={`lc_expiration_date${index}`}
                                 id={`lc_expiration_date${index}`}

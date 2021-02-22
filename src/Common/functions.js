@@ -1,7 +1,7 @@
 export const formatDate = (s) => {
     try {
         const dt = new Date(s);
-        return dt.toLocaleDateString();
+        return dt.toISOString().substr(0, 10);
     }
     catch {
         return s;

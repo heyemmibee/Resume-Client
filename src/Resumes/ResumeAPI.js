@@ -20,7 +20,7 @@ export const create = async (accessToken, resume) => {
 
 export const update = async (accessToken, id, resume) => {
     return await http.post(`/resumes/${id}`, resume, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'x-access-token': accessToken

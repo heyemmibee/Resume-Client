@@ -1,7 +1,6 @@
 import AddOneButton from './AddOneButton';
 import RemoveOneButton from './RemoveOneButton';
 import { Fragment } from 'react';
-import { formatDate } from '../Common/functions';
 
 const WorkExperience = (props) => {
 

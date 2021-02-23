@@ -1,10 +1,10 @@
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import { GoogleLogin } from 'react-google-login';
-import { AuthContext } from '../context/authContext';
-import {
-    useLocation,
-    useHistory
-} from "react-router-dom";
+// import { AuthContext } from '../context/authContext';
+// import {
+//     useLocation,
+//     useHistory
+// } from "react-router-dom";
 
 const RegisterForm = ({ onClick, registration, onChange, isTaken, status, uniqueError }) => {
 
@@ -14,14 +14,14 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
         emailOptions['aria-invalid'] = true;
     }
 
-    const authContext = useContext(AuthContext);
-    const history = useHistory();
-    const location = useLocation();
+    // const authContext = useContext(AuthContext);
+    // const history = useHistory();
+    // const location = useLocation();
 
     const onGoogleLoginSuccess = (res) => {
         console.log(res)
-        const profile = res?.profileObj;
-        const token = res?.tokenId;
+        // const profile = res?.profileObj;
+        // const token = res?.tokenId;
 
         // const { from } = location.state || { from: { pathname: "/resumes" } };
         // authContext.login(data, () => {
@@ -85,7 +85,7 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
                                                 </div>
                                             </button>
                                         )}
-                                        onSuccess={() => { }}
+                                        onSuccess={onGoogleLoginSuccess}
                                         onFailure={() => { }}
                                         cookiePolicy={'single_host_origin'}
                                     />

@@ -6,7 +6,8 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const initialUser = {
         email: '',
-        accessToken: ''
+        accessToken: '',
+        oauth: false
     };
     const [user, setUser] = useLocalStorage('currentUser', initialUser);
 

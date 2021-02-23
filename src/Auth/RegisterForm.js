@@ -86,7 +86,7 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
                                             </button>
                                         )}
                                         onSuccess={onGoogleLoginSuccess}
-                                        onFailure={() => { }}
+                                        onFailure={() => { console.log('error') }}
                                         cookiePolicy={'single_host_origin'}
                                     />
                                 </div>

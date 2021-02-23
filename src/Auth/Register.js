@@ -1,7 +1,7 @@
 import { useState, useContext, Fragment } from 'react';
 import RegisterForm from './RegisterForm';
 import { NotificationContext, NotificationType } from '../context/notificationContext';
-import { registerUser, isUsernameAvailable, isEmailAvailable } from './AuthAPI';
+import { registerUser, isEmailAvailable } from './AuthAPI';
 import { AuthContext } from '../context/authContext';
 import {
     useLocation,
@@ -16,7 +16,6 @@ const Registration = () => {
     const location = useLocation();
 
     const initialState = {
-        username: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -92,12 +91,12 @@ const Registration = () => {
     }
 
     const isTaken = (e) => {
-        const checkUsername = async (fn) => {
+        const checkEmail = async () => {
             try {
-                const { statusCode } = await fn();
+                const { statusCode } = await isEmailAvailable(e.target.value);
                 setUniqueError({
                     ...uniqueError,
-                    [e.target.id]: statusCode === 200 ? `${e.target.id} is taken` : ''
+                    [e.target.id]: statusCode === 200 ? 'Email is taken' : ''
                 })
             } catch (err) {
                 notificationContext.setNotification({
@@ -107,15 +106,12 @@ const Registration = () => {
             }
         }
 
-        if (e.target.id === 'email')
-            checkUsername(() => isEmailAvailable(e.target.value));
-        else
-            checkUsername(() => isUsernameAvailable(e.target.value));
+        checkEmail();
     }
 
     return (
         <Fragment>
-            <div className='md:w-2/4 mx-auto'>
+            <div className='md:w-3/4 mx-auto'>
                 <RegisterForm
                     status={status.state}
                     registration={registration}

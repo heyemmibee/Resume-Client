@@ -60,12 +60,16 @@ const Login = () => {
                     });
                     return;
                 }
+                const loggedInuser = {
+                    ...data,
+                    oauth: false
+                };
                 const { from } = location.state || { from: { pathname: "/resumes" } };
                 notificationContext.clearNotification();
                 setStatus({
                     state: state.SUCCESS
                 });
-                authContext.login(data, () => {
+                authContext.login(loggedInuser, () => {
                     history.replace(from);
                 });
             } catch (err) {

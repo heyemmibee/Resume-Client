@@ -123,6 +123,7 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
                                         </button>
                                     </div>
                                 </form>
+                                <hr className='w-full my-6 border-gray-300' />
                                 <p className="mt-8 text-center">Already have an account? <a href='/login'
                                     className="font-semibold text-black hover:text-black">Sign In</a>
                                 </p>

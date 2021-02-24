@@ -87,7 +87,7 @@ const Login = () => {
 
     return (
         <Fragment>
-            <div className='md:w-2/4 mx-auto'>
+            <div className='md:w-3/4 mx-auto'>
                 <LoginForm
                     status={status.state}
                     form={loginData}

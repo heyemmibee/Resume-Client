@@ -19,11 +19,9 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
     const location = useLocation();
 
     const onGoogleLoginSuccess = (res) => {
-        console.log(res)
         const user = {
             email: res?.profileObj.email,
-            accessToken: res?.tokenId,
-            oauth: true
+            accessToken: res?.tokenId
         }
 
         const { from } = location.state || { from: { pathname: "/resumes" } };

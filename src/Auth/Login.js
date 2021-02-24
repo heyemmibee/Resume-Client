@@ -61,8 +61,7 @@ const Login = () => {
                     return;
                 }
                 const loggedInuser = {
-                    ...data,
-                    oauth: false
+                    ...data
                 };
                 const { from } = location.state || { from: { pathname: "/resumes" } };
                 notificationContext.clearNotification();

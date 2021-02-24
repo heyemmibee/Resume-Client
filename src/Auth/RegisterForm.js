@@ -49,7 +49,10 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
                                     If you do login for testing purposes then please know that I may delete the
                                     mongo database and start from fresh. You can also use a temporary email address
                                     from https://temp-mail.org/. If you do decide to login with Google then I only store
-                                    your email and a google id which google uses to uniquely identifies you.
+                                    your email and a google id which google uses to uniquely identifies you and I cannot do
+                                    anything with it. The access token that google gives is not used to make any calls to your
+                                    Google account and even if I did Google would reject my calls because the app does not require any
+                                    special scopes, or you can check my code on GitHub to know I am not lying!
                                 </div>
                             </div>
                         </div>

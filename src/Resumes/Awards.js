@@ -3,6 +3,15 @@ import RemoveOneButton from './RemoveOneButton';
 import { Fragment } from 'react';
 
 const Awards = (props) => {
+
+    const award = {
+        'title': '',
+        'year': new Date().getFullYear(),
+        'presented_by': '',
+        'url': '',
+        'summary': ''
+    };
+
     return (
         <Fragment>
             {props.awards.map((item, index) => (
@@ -112,6 +121,7 @@ const Awards = (props) => {
                 componentAdded={props.componentAdded}
                 title='add award'
                 className='w-42'
+                obj={award}
             />
         </Fragment>
     )

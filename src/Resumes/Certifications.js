@@ -3,6 +3,17 @@ import RemoveOneButton from './RemoveOneButton';
 import { Fragment } from 'react';
 
 const Certifications = (props) => {
+
+    const cert = {
+        'title': '',
+        'issuing_organization': '',
+        'credential_expires': true,
+        'issue_date': '',
+        'expiration_date': '',
+        'credential_id': '',
+        'credential_url': ''
+    };
+
     return (
         <Fragment>
             {props.certifications.map((item, index) => (
@@ -131,6 +142,7 @@ const Certifications = (props) => {
                 componentAdded={props.componentAdded}
                 title='add license / certification'
                 className='w-42'
+                obj={cert}
             />
         </Fragment>
     )

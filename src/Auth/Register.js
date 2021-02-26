@@ -2,7 +2,6 @@ import { useState, useContext, Fragment } from 'react';
 import RegisterForm from './RegisterForm';
 import { NotificationContext, NotificationType } from '../context/notificationContext';
 import { registerUser, isEmailAvailable } from './AuthAPI';
-import { AuthContext } from '../context/authContext';
 import {
     useLocation,
     useHistory
@@ -11,7 +10,6 @@ import {
 const Registration = () => {
 
     const notificationContext = useContext(NotificationContext);
-    const authContext = useContext(AuthContext);
     const history = useHistory();
     const location = useLocation();
 
@@ -51,7 +49,7 @@ const Registration = () => {
                 const { statusCode, data } = await registerUser(registration);
 
                 if (statusCode === 200) {
-                    const { from } = location.state || { from: { pathname: "/resumes" } };
+                    const { from } = location.state || { from: { pathname: "/login" } };
                     setStatus({
                         state: state.SUCCESS
                     });
@@ -60,9 +58,7 @@ const Registration = () => {
                         message: 'Account created successfully.',
                         type: NotificationType.SUCCESS
                     });
-                    authContext.login(data, () => {
-                        history.replace(from);
-                    });
+                    history.replace(from);
                 } else {
                     setStatus({
                         state: state.ERROR

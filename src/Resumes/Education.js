@@ -3,6 +3,18 @@ import RemoveOneButton from './RemoveOneButton';
 import { Fragment } from 'react';
 
 const Education = (props) => {
+
+    const education = {
+        'school': '',
+        'degree': '',
+        'field_of_study': '',
+        'grade': '',
+        'from': '',
+        'to': '',
+        'activities_and_socities': '',
+        'graduated': false
+    };
+
     return (
         <Fragment>
             {props.education.map((item, index) => (
@@ -152,6 +164,7 @@ const Education = (props) => {
                 componentAdded={props.componentAdded}
                 title='add education'
                 className='w-42'
+                obj={education}
             />
         </Fragment>
     )

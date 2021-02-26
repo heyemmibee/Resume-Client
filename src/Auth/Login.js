@@ -53,7 +53,7 @@ const Login = () => {
                 if (statusCode !== 200) {
                     notificationContext.setNotification({
                         message: data.message,
-                        type: NotificationType.SUCCESS
+                        type: NotificationType.ERROR
                     });
                     setStatus({
                         state: state.ERROR

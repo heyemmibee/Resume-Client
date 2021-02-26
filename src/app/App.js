@@ -17,6 +17,14 @@ const Register = lazy(() => import('../Auth').then(module => ({
   default: module.Register
 })));
 
+const ForgotPassword = lazy(() => import('../Users').then(module => ({
+  default: module.ForgotPassword
+})));
+
+const ResetPassword = lazy(() => import('../Users').then(module => ({
+  default: module.ResetPassword
+})));
+
 const ResumeList = lazy(() => import('../Resumes').then(module => ({
   default: module.ResumeList
 })));
@@ -49,8 +57,10 @@ function App() {
           }
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
+              <Route path='/forgotpassword' component={ForgotPassword} />
               <Route path='/register' component={Register} />
               <Route path='/login' component={Login} />
+              <Route path='/resetpassword/:userId/:token' component={ResetPassword} />
               <ProtectedRoute path='/resumes/:id/edit' component={ResumeForm} />
               <ProtectedRoute path='/resumes/new' component={ResumeForm} />
               <ProtectedRoute path='/resumes/:id' component={Resume} />

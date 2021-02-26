@@ -3,6 +3,15 @@ import RemoveOneButton from './RemoveOneButton';
 import { Fragment } from 'react';
 
 const Talks = (props) => {
+
+    const talk = {
+        'title': '',
+        'year': new Date().getFullYear(),
+        'event': '',
+        'url': '',
+        'summary': ''
+    };
+
     return (
         <Fragment>
             {props.talks.map((item, index) => (
@@ -111,6 +120,7 @@ const Talks = (props) => {
                 componentAdded={props.componentAdded}
                 title='add talk'
                 className='w-28'
+                obj={talk}
             />
         </Fragment>
     )

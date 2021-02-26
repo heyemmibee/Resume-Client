@@ -3,7 +3,7 @@ const AddOneButton = (props) => {
         <div
             className='col-span-6 bg-secondary px-4 py-5 bg-white space-y-6 sm:p-6'>
             <button
-                onClick={(e) => props.componentAdded(e, props.resumeKey)}
+                onClick={(e) => props.componentAdded(e, props.resumeKey, props.obj)}
                 className={`flex flex-row ${props.className}`}>
                 <div
                     className='w-6'>
@@ -21,7 +21,7 @@ const AddOneButton = (props) => {
                 </div>
                 <div className='pl-2'>{props.title}</div>
             </button>
-        </div >
+        </div>
     )
 }
 

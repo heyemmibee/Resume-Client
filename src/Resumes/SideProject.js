@@ -2,7 +2,16 @@ import AddOneButton from './AddOneButton';
 import RemoveOneButton from './RemoveOneButton';
 import { Fragment } from 'react';
 
-const SideProjects = (props) => {
+const SideProject = (props) => {
+
+    const sideProject = {
+        'title': '',
+        'url': '',
+        'summary': '',
+        'year': new Date().getFullYear(),
+        'github_url': ''
+    };
+
     return (
         <Fragment>
             {props.side_projects.map((item, index) => (
@@ -118,9 +127,10 @@ const SideProjects = (props) => {
                 componentAdded={props.componentAdded}
                 title='add side project'
                 className='w-42'
+                obj={sideProject}
             />
         </Fragment>
     )
 }
 
-export default SideProjects;
+export default SideProject;

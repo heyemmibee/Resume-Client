@@ -5,6 +5,7 @@ const RemoveOneButton = (props) => {
             onClick={(e) => props.componentRemoved(e, props.resumeKey, props.index)}>
             <div className='w-6'>
                 <svg
+                    role='img'
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
                     viewBox='0 0 24 24'

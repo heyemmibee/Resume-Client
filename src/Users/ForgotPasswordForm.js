@@ -51,6 +51,7 @@ const ForgotPasswordForm = ({ onSubmit, onFieldChanged, obj, status }) => {
                                                 Send Password Reset Link
                                             </div>
                                             <svg
+                                                role='img'
                                                 className={`flex-none animate-spin -mr-1 ml-3 h-5 w-5 text-secondary ${status === 'STARTED' ? 'block' : 'hidden'}`}
                                                 fill='none' viewBox='0 0 24 24'>
                                                 <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>

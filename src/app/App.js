@@ -8,6 +8,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { NotificationContext } from '../context/notificationContext';
 import ProtectedRoute from './ProtectedRoute';
+import Navigation from '../Common/Navigation';
 
 const Login = lazy(() => import('../Auth').then(module => ({
   default: module.Login
@@ -46,6 +47,7 @@ function App() {
     <div className="md:container md:mx-auto">
       <Router>
         <header>
+          <Navigation />
         </header>
         <main>
           {notificationContext.notification.message.length !== 0 &&

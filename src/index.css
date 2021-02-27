@@ -5,6 +5,7 @@
   --color-two: hsla(33, 94%, 55%, 1);
   --red: #F94144;
   --yellow: #F9C74F;
+  --white: #FFF;
 }
 
 @tailwind base;

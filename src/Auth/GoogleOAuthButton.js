@@ -30,12 +30,14 @@ const GoogleOAuthButton = () => {
             render={(renderProps) => (
                 <button
                     onClick={renderProps.onClick} disabled={renderProps.disabled}
-                    className="inline-flex w-full px-4 py-3 font-semibold text-black transition duration-500 ease-in-out transform bg-white border border-gray-300 rounded-lg hover:bg-black hover:text-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2">
+                    className="inline-flex w-full px-4 py-3 font-semibold text-black transition duration-500 ease-in-out transform border border-gray-300 rounded-lg hover:bg-black hover:text-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2">
                     <div className="flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             xmlnsXlink='"http://www.w3.org/1999/xlink"'
                             className="w-6 h-6"
-                            viewBox="0 0 48 48">
+                            viewBox="0 0 48 48"
+                            role='img'
+                        >
                             <defs>
                                 <path id="a"
                                     d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z" />

@@ -13,7 +13,7 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
             <div className="container mx-auto">
                 <div className="flex justify-center px-2 py-6 ">
                     <div className="flex w-full rounded-lg xl:w-3/4 lg:w-11/12 lg:shadow-xl bg-secondary">
-                        <div className="relative hidden w-full h-auto bg-white bg-cover border-r rounded-l-lg lg:block lg:w-6/12">
+                        <div className="relative hidden w-full h-auto bg-cover border-r rounded-l-lg lg:block lg:w-6/12">
                             <div className="relative z-10 m-12 text-left ">
                                 <h2
                                     className="text-lg font-bold tracking-tighter text-black uppercase transition duration-500 ease-in-out transform hover:text-lightBlack-500 dark:text-lightBlue-400">
@@ -35,7 +35,7 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
                             </div>
                         </div>
                         <div
-                            className="w-full px-8 py-24 bg-white border-gray-100 rounded-lg lg:w-8/12 lg:px-24 lg:py-4 lg:rounded-l-none s">
+                            className="w-full px-8 py-24 border-gray-100 rounded-lg lg:w-8/12 lg:px-24 lg:py-4 lg:rounded-l-none s">
                             <div className="relative z-10 text-left ">
                                 <div className="flex justify-enter lg:py-6">
                                     <GoogleOAuthButton />
@@ -111,6 +111,7 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
                                                 Create Account
                                             </div>
                                             <svg
+                                                role='img'
                                                 className={`flex-none animate-spin -mr-1 ml-3 h-5 w-5 text-secondary ${status === 'STARTED' ? 'block' : 'hidden'}`}
                                                 fill='none' viewBox='0 0 24 24'>
                                                 <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>

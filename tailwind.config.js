@@ -19,6 +19,7 @@ module.exports = {
       red: 'var(--red)',
       error: 'var(--red)',
       yellow: 'var(--yellow)',
+      white: 'var(--white)'
     },
     extend: {},
   },

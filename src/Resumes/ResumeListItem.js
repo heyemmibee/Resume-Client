@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 const ResumeListItem = (props) => {
     const resumes = props.resumes.map((item) => (
         <div
-            className="md:flex md:items-center md:justify-between md:w-3/4 mx-auto bg-secondary rounded-xl p-6 m-6"
+            className="md:flex md:items-center md:justify-between bg-secondary rounded-xl p-6 m-6"
             key={item._id}>
             <div
                 className="flex-1 min-w-0">

@@ -158,7 +158,7 @@ const ResumeForm = () => {
                         />
                         <div className='mt-5 md:mt-0 md:col-span-2'>
                             <div className='shadow overflow-hidden sm:rounded-md'>
-                                <div className='px-4 py-5 bg-white space-y-6 sm:p-6 bg-secondary'>
+                                <div className='px-4 py-5 space-y-6 sm:p-6 bg-secondary'>
                                     <div className='col-span-6 sm:col-span-3'>
                                         <label htmlFor='resume_name' className='lbl'>Resume name</label>
                                         <input
@@ -188,7 +188,7 @@ const ResumeForm = () => {
                         />
                         <div className='mt-5 md:mt-0 md:col-span-2'>
                             <div className='shadow sm:rounded-md sm:overflow-hidden'>
-                                <div className='px-4 py-5 bg-white space-y-6 sm:p-6 bg-secondary'>
+                                <div className='px-4 py-5 space-y-6 sm:p-6 bg-secondary'>
                                     <div className='grid grid-cols-6 gap-6'>
                                         <div className='col-span-6 sm:col-span-3'>
                                             <label htmlFor='pronouns' className='lbl'>Pronoun</label>
@@ -285,7 +285,7 @@ const ResumeForm = () => {
                         <div className='mt-5 md:mt-0 md:col-span-2'>
 
                             <div className='shadow overflow-hidden sm:rounded-md'>
-                                <div className='px-4 py-5 bg-white sm:p-6 bg-secondary'>
+                                <div className='px-4 py-5 sm:p-6 bg-secondary'>
                                     <div className='grid grid-cols-6 gap-6'>
                                         <div className='col-span-6 sm:col-span-6'>
                                             <label htmlFor='headline' className='lbl'>Headline</label>

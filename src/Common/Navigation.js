@@ -27,7 +27,7 @@ const Navigation = () => {
                             </div>
                             <div className="hidden md:block">
                                 <div className="ml-10 flex items-baseline space-x-4">
-                                    <a href="/" title='Home' className="bg-gray-900 text-white px-3 py-2 text-sm font-bold">Home</a>
+                                    <a href="/" title='Home' className="bg-gray-900 text-white px-3 py-2 text-sm font-bold text-2xl">Home</a>
                                 </div>
                             </div>
                         </div>

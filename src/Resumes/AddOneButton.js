@@ -1,7 +1,7 @@
 const AddOneButton = (props) => {
     return (
         <div
-            className='col-span-6 bg-secondary px-4 py-5 bg-white space-y-6 sm:p-6'>
+            className='col-span-6 bg-secondary px-4 py-5 space-y-6 sm:p-6'>
             <button
                 onClick={(e) => props.componentAdded(e, props.resumeKey, props.obj)}
                 className={`flex flex-row ${props.className}`}>

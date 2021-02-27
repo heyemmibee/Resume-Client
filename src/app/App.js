@@ -9,6 +9,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { NotificationContext } from '../context/notificationContext';
 import ProtectedRoute from './ProtectedRoute';
 import Navigation from '../Common/Navigation';
+import Footer from '../Common/Footer';
 
 const Login = lazy(() => import('../Auth').then(module => ({
   default: module.Login
@@ -71,8 +72,7 @@ function App() {
           </Suspense>
         </main>
       </Router>
-      <footer>
-      </footer>
+      <Footer />
     </div>
   );
 }

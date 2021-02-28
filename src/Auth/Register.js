@@ -46,7 +46,7 @@ const Registration = () => {
             });
 
             try {
-                const { statusCode, data } = await registerUser(registration);
+                const { statusCode } = await registerUser(registration);
 
                 if (statusCode === 200) {
                     const { from } = location.state || { from: { pathname: '/login' } };

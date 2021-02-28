@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import NavigationLinks from './NavigationLinks';
+import NavigationAuthLinks from './NavigationAuthLinks';
 
 const Navigation = () => {
 
@@ -61,9 +62,7 @@ const Navigation = () => {
                         </div>
                         <div className='pt-4 pb-3 border-t border-white'>
                             <div className='mt-3 px-2 space-y-1'>
-                                <a href='/profile' className='block px-3 py-2 rounded-md text-white'>Your Profile</a>
-                                <a href='/settings' className='block px-3 py-2 rounded-md text-white'>Settings</a>
-                                <a href='#' className='block px-3 py-2 rounded-md text-white'>Sign out</a>
+                                <NavigationAuthLinks className='text-white' />
                             </div>
                         </div>
                     </div>

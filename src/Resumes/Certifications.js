@@ -76,7 +76,7 @@ const Certifications = (props) => {
                                 className='lbl'>
                                 Credential Url
                             </label>
-                            <div className="mt-1 flex rounded-md shadow-sm">
+                            <div className='mt-1 flex rounded-md shadow-sm'>
                                 <span className='http-lbl'>
                                     http://
                                 </span>

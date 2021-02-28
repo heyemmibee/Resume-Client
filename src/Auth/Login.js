@@ -7,7 +7,7 @@ import { AuthContext } from '../context/authContext';
 import {
     useLocation,
     useHistory
-} from "react-router-dom";
+} from 'react-router-dom';
 
 const Login = () => {
 
@@ -22,10 +22,10 @@ const Login = () => {
     }));
 
     const state = Object.freeze({
-        "INITIAL": "INITIAL",
-        "STARTED": "STARTED",
-        "SUCCESS": "SUCCESS",
-        "ERROR": "ERROR"
+        'INITIAL': 'INITIAL',
+        'STARTED': 'STARTED',
+        'SUCCESS': 'SUCCESS',
+        'ERROR': 'ERROR'
     });
 
     const [status, setStatus] = useState(() => ({
@@ -63,7 +63,7 @@ const Login = () => {
                 const loggedInuser = {
                     ...data
                 };
-                const { from } = location.state || { from: { pathname: "/resumes" } };
+                const { from } = location.state || { from: { pathname: '/resumes' } };
                 notificationContext.clearNotification();
                 setStatus({
                     state: state.SUCCESS

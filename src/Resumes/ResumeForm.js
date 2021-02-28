@@ -10,9 +10,9 @@ import SideProject from './SideProject';
 import ResumeFormBorder from './ResumeFormBorder';
 import validate from './ResumeFormValidation';
 import { AuthContext } from '../context/authContext';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { useHttp } from '../hooks';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import { get as GetResume, create, update } from './ResumeAPI';
 import { ResumeFormInfoSection, ResumeFormDataSection } from './ResumeFormSection';
 

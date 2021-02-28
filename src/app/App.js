@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route
-} from "react-router-dom";
+} from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { NotificationContext } from '../context/notificationContext';
@@ -45,7 +45,7 @@ function App() {
   const notificationContext = useContext(NotificationContext);
 
   return (
-    <div className="md:container md:mx-auto">
+    <div className='md:container md:mx-auto'>
       <Router>
         <header>
           <Navigation />

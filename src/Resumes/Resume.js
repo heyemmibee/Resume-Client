@@ -1,6 +1,6 @@
 import { useContext, useCallback, Fragment } from 'react';
 import { useHttp } from '../hooks';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import { get as GetResume } from './ResumeAPI';
 import { AuthContext } from '../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -80,7 +80,7 @@ const Resume = () => {
                             rel='nofollow noreferrer'
                             target='_blank'
                             href={resume.links.dribble}>
-                            <FontAwesomeIcon icon={["fab", "dribbble"]} size='3x' />
+                            <FontAwesomeIcon icon={['fab', 'dribbble']} size='3x' />
                         </a>
                     )}
                     {resume.links.facebook !== '' && (
@@ -90,7 +90,7 @@ const Resume = () => {
                             rel='nofollow noreferrer'
                             target='_blank'
                             href={resume.links.facebook}>
-                            <FontAwesomeIcon icon={["fab", "facebook"]} size='3x' />
+                            <FontAwesomeIcon icon={['fab', 'facebook']} size='3x' />
                         </a>
                     )}
                     {resume.links.github !== '' && (
@@ -100,7 +100,7 @@ const Resume = () => {
                             rel='nofollow noreferrer'
                             target='_blank'
                             href={resume.links.github}>
-                            <FontAwesomeIcon icon={["fab", "github"]} size='3x' />
+                            <FontAwesomeIcon icon={['fab', 'github']} size='3x' />
                         </a>
                     )}
                     {resume.links.twitter !== '' && (
@@ -110,7 +110,7 @@ const Resume = () => {
                             rel='nofollow noreferrer'
                             target='_blank'
                             href={resume.links.twitter}>
-                            <FontAwesomeIcon icon={["fab", "twitter"]} size='3x' />
+                            <FontAwesomeIcon icon={['fab', 'twitter']} size='3x' />
                         </a>
                     )}
                     {resume.links.website !== '' && (
@@ -120,7 +120,7 @@ const Resume = () => {
                             rel='nofollow noreferrer'
                             target='_blank'
                             href={resume.links.website}>
-                            <FontAwesomeIcon icon={["fab", "firefox-browser"]} size='3x' />
+                            <FontAwesomeIcon icon={['fab', 'firefox-browser']} size='3x' />
                         </a>
                     )}
                 </div>

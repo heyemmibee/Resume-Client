@@ -7,10 +7,10 @@ const ForgotPassword = () => {
 
     const notificationContext = useContext(NotificationContext);
     const state = Object.freeze({
-        "INITIAL": "INITIAL",
-        "STARTED": "STARTED",
-        "SUCCESS": "SUCCESS",
-        "ERROR": "ERROR"
+        'INITIAL': 'INITIAL',
+        'STARTED': 'STARTED',
+        'SUCCESS': 'SUCCESS',
+        'ERROR': 'ERROR'
     });
 
     const [status, setStatus] = useState(() => ({

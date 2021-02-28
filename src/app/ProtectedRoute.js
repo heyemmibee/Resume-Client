@@ -1,7 +1,7 @@
 import {
     Route,
     Redirect, useLocation
-} from "react-router-dom";
+} from 'react-router-dom';
 import { useLocalStorage } from '../hooks';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {

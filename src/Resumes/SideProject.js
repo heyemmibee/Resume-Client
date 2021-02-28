@@ -58,7 +58,7 @@ const SideProject = (props) => {
                                 Url
                             </label>
                             <div
-                                className="mt-1 flex rounded-md shadow-sm">
+                                className='mt-1 flex rounded-md shadow-sm'>
                                 <span
                                     className='http-lbl'>
                                     http://
@@ -81,7 +81,7 @@ const SideProject = (props) => {
                                 className='lbl'>
                                 GitHub Url
                             </label>
-                            <div className="mt-1 flex rounded-md shadow-sm">
+                            <div className='mt-1 flex rounded-md shadow-sm'>
                                 <span className='http-lbl'>
                                     http://
                                 </span>

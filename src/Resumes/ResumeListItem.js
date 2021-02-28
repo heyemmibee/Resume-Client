@@ -3,10 +3,10 @@ import { Fragment } from 'react';
 const ResumeListItem = (props) => {
     const resumes = props.resumes.map((item) => (
         <div
-            className="md:flex md:items-center md:justify-between bg-secondary rounded-xl p-6 m-6"
+            className='md:flex md:items-center md:justify-between bg-secondary rounded-xl p-6 m-6'
             key={item._id}>
             <div
-                className="flex-1 min-w-0">
+                className='flex-1 min-w-0'>
                 <a
                     href={`/resumes/${item._id}`}
                     className='text-xl font-bold leading-7 text-gray-900 sm:text-2xl sm:truncate'>

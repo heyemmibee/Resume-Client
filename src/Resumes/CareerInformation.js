@@ -9,21 +9,21 @@ const CareerInformation = (props) => {
                 Object.keys(props.links).map((item, index) => (
                     <div
                         key={item}
-                        className="col-span-6 sm:col-span-3">
+                        className='col-span-6 sm:col-span-3'>
                         <label
                             htmlFor={`socialLink${index}`}
-                            className="lbl">
+                            className='lbl'>
                             {capitalize(item)}
                         </label>
                         <div
-                            className="mt-1 flex rounded-md shadow-sm">
+                            className='mt-1 flex rounded-md shadow-sm'>
                             <span
                                 className='http-lbl'>
                                 http://
                             </span>
                             <input
                                 onChange={(e) => props.socialLinkChanged(e, item)}
-                                type="url"
+                                type='url'
                                 name={`socialLink${index}`}
                                 id={`socialLink${index}`}
                                 value={props.links[item]}

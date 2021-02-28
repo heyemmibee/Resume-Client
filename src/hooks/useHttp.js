@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/authContext';
 import {
     useHistory
-} from "react-router-dom";
+} from 'react-router-dom';
 
 const useHttp = (fn, initialData) => {
     const [data, setData] = useState(initialData);

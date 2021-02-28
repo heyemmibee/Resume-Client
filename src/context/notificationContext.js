@@ -2,11 +2,11 @@ import { useState, createContext } from 'react';
 
 export const NotificationType = Object.freeze({
     'NONE': 'NONE',
-    "SUCCESS": "SUCCESS",
-    "ERROR": "ERROR",
-    "WARNING": "WARNING",
-    "INFORMATION": "INFORMATION",
-    "LOADING": "LOADING"
+    'SUCCESS': 'SUCCESS',
+    'ERROR': 'ERROR',
+    'WARNING': 'WARNING',
+    'INFORMATION': 'INFORMATION',
+    'LOADING': 'LOADING'
 });
 
 export const NotificationContext = createContext();

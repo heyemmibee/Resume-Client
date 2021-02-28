@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import ResetPasswordForm from './ResetPasswordForm';
 import { resetPassword } from './UserAPI';
 import { NotificationContext, NotificationType } from '../context/notificationContext';
-import { useParams, useHistory, useLocation } from "react-router-dom";
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 
 const ResetPassword = () => {
 
@@ -11,10 +11,10 @@ const ResetPassword = () => {
     const { userId, token } = useParams();
     const notificationContext = useContext(NotificationContext);
     const state = Object.freeze({
-        "INITIAL": "INITIAL",
-        "STARTED": "STARTED",
-        "SUCCESS": "SUCCESS",
-        "ERROR": "ERROR"
+        'INITIAL': 'INITIAL',
+        'STARTED': 'STARTED',
+        'SUCCESS': 'SUCCESS',
+        'ERROR': 'ERROR'
     });
 
     const [status, setStatus] = useState(() => ({
@@ -40,7 +40,7 @@ const ResetPassword = () => {
                 setStatus({
                     state: state.STARTED
                 });
-                const { from } = location.state || { from: { pathname: "/login" } };
+                const { from } = location.state || { from: { pathname: '/login' } };
                 const { statusCode, data } = await resetPassword(userId, token, resetObj);
                 if (statusCode !== 200) {
                     notificationContext.setNotification({

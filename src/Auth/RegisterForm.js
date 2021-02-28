@@ -9,21 +9,21 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
     }
 
     return (
-        <section className="flex flex-col items-center h-screen md:flex-row">
-            <div className="container mx-auto">
-                <div className="flex justify-center px-2 py-6 ">
-                    <div className="flex w-full rounded-lg xl:w-3/4 lg:w-11/12 lg:shadow-xl bg-secondary">
-                        <div className="relative hidden w-full h-auto bg-cover border-r rounded-l-lg lg:block lg:w-6/12">
-                            <div className="relative z-10 m-12 text-left ">
+        <section className='flex flex-col items-center h-screen md:flex-row'>
+            <div className='container mx-auto'>
+                <div className='flex justify-center px-2 py-6 '>
+                    <div className='flex w-full rounded-lg xl:w-3/4 lg:w-11/12 lg:shadow-xl bg-secondary'>
+                        <div className='relative hidden w-full h-auto bg-cover border-r rounded-l-lg lg:block lg:w-6/12'>
+                            <div className='relative z-10 m-12 text-left '>
                                 <h2
-                                    className="text-lg font-bold tracking-tighter text-black uppercase transition duration-500 ease-in-out transform hover:text-lightBlack-500 dark:text-lightBlue-400">
+                                    className='text-lg font-bold tracking-tighter text-black uppercase transition duration-500 ease-in-out transform hover:text-lightBlack-500 dark:text-lightBlue-400'>
                                     No Name
                                 </h2>
-                                <h2 className="mt-12 mb-2 text-2xl font-semibold tracking-tighter text-black sm:text-3xl title-font">
+                                <h2 className='mt-12 mb-2 text-2xl font-semibold tracking-tighter text-black sm:text-3xl title-font'>
                                     Create an account.
                                 </h2>
                                 <div
-                                    className="w-full mt-10 mb-8 text-base leading-relaxed text-gray-900 sm:md:w-3/3 lg:text-1xl ">
+                                    className='w-full mt-10 mb-8 text-base leading-relaxed text-gray-900 sm:md:w-3/3 lg:text-1xl '>
                                     If you do login for testing purposes then please know that I may delete the
                                     mongo database and start from fresh. You can also use a temporary email address
                                     from https://temp-mail.org/. If you do decide to login with Google then I only store
@@ -35,14 +35,14 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
                             </div>
                         </div>
                         <div
-                            className="w-full px-8 py-24 border-gray-100 rounded-lg lg:w-8/12 lg:px-24 lg:py-4 lg:rounded-l-none s">
-                            <div className="relative z-10 text-left ">
-                                <div className="flex justify-enter lg:py-6">
+                            className='w-full px-8 py-24 border-gray-100 rounded-lg lg:w-8/12 lg:px-24 lg:py-4 lg:rounded-l-none s'>
+                            <div className='relative z-10 text-left '>
+                                <div className='flex justify-enter lg:py-6'>
                                     <GoogleOAuthButton />
                                 </div>
                                 <form
                                     onSubmit={onClick}>
-                                    <div className="mt-4">
+                                    <div className='mt-4'>
                                         <label
                                             className='block text-base font-medium leading-relaxed text-gray-700'
                                             htmlFor='email'>
@@ -66,7 +66,7 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
                                                 id={emailOptions['aria-describedby']}>{uniqueError.email}</span>
                                         }
                                     </div>
-                                    <div className="mt-4">
+                                    <div className='mt-4'>
                                         <label
                                             className='text-base font-medium leading-relaxed text-gray-700'
                                             htmlFor='password'>
@@ -84,7 +84,7 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
                                             autoComplete='new-password'
                                         />
                                     </div>
-                                    <div className="mt-4">
+                                    <div className='mt-4'>
                                         <label
                                             className='text-base font-medium leading-relaxed text-gray-700'
                                             htmlFor='password_confirmation'>
@@ -102,7 +102,7 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
                                             autoComplete='new-password'
                                         />
                                     </div>
-                                    <div className="mt-6">
+                                    <div className='mt-6'>
                                         <button
                                             className={`flex flex-row px-4 py-2 ${status === 'STARTED' ? 'cursor-not-allowed' : ''}
                     font-medium rounded-md text-secondary bg-primary hover:bg-primary w-full text-center`}
@@ -125,8 +125,8 @@ const RegisterForm = ({ onClick, registration, onChange, isTaken, status, unique
                                     </div>
                                 </form>
                                 <hr className='w-full my-6 border-gray-300' />
-                                <p className="mt-8 text-center">Already have an account? <a href='/login'
-                                    className="font-semibold text-black hover:text-black">Sign In</a>
+                                <p className='mt-8 text-center'>Already have an account? <a href='/login'
+                                    className='font-semibold text-black hover:text-black'>Sign In</a>
                                 </p>
                             </div>
                         </div>

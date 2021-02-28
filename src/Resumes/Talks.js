@@ -74,7 +74,7 @@ const Talks = (props) => {
                                 className='block text-sm font-medium text-gray-700'>
                                 Url
                             </label>
-                            <div className="mt-1 flex rounded-md shadow-sm">
+                            <div className='mt-1 flex rounded-md shadow-sm'>
                                 <span className='http-lbl'>
                                     http://
                                 </span>

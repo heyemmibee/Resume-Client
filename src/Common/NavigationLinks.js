@@ -48,7 +48,7 @@ const NavigationLinks = () => {
                     Resumes
                 </a>
             </div>
-            <div className="ml-3 relative">
+            <div className='ml-3 relative'>
                 <div>
                     <button
                         onClick={toggleProfile}
@@ -61,8 +61,8 @@ const NavigationLinks = () => {
                 </div>
                 {displaySection.profile === true ? (
                     <div className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5' role='menu' aria-orientation='vertical' aria-labelledby='user-menu'>
-                        <a href='#' className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-2xl' role='menuitem'>Your Profile</a>
-                        <a href='#' className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-2xl' role='menuitem'>Settings</a>
+                        <a href='/profile' className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-2xl' role='menuitem'>Your Profile</a>
+                        <a href='/settings' className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-2xl' role='menuitem'>Settings</a>
                         <button
                             onClick={logutUser}
                             className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-2xl' role='menuitem'>Sign out

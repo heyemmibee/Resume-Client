@@ -5,7 +5,7 @@ import { registerUser, isEmailAvailable } from './AuthAPI';
 import {
     useLocation,
     useHistory
-} from "react-router-dom";
+} from 'react-router-dom';
 
 const Registration = () => {
 
@@ -21,10 +21,10 @@ const Registration = () => {
     }
 
     const state = Object.freeze({
-        "INITIAL": "INITIAL",
-        "STARTED": "STARTED",
-        "SUCCESS": "SUCCESS",
-        "ERROR": "ERROR"
+        'INITIAL': 'INITIAL',
+        'STARTED': 'STARTED',
+        'SUCCESS': 'SUCCESS',
+        'ERROR': 'ERROR'
     });
 
     const [registration, setRegistration] = useState(() => initialState);
@@ -49,7 +49,7 @@ const Registration = () => {
                 const { statusCode, data } = await registerUser(registration);
 
                 if (statusCode === 200) {
-                    const { from } = location.state || { from: { pathname: "/login" } };
+                    const { from } = location.state || { from: { pathname: '/login' } };
                     setStatus({
                         state: state.SUCCESS
                     });

@@ -4,7 +4,7 @@ const ForgotPasswordForm = ({ onSubmit, onFieldChanged, obj, status }) => {
             <div className='container mx-auto'>
                 <div className='flex justify-center px-2 py-6 '>
                     <div className='flex w-full rounded-lg xl:w-3/4 lg:w-11/12 lg:shadow-xl bg-secondary'>
-                        <div className='relative hidden w-full h-auto bg-white bg-cover border-r rounded-l-lg lg:block lg:w-6/12'>
+                        <div className='relative hidden w-full h-auto bg-cover border-r rounded-l-lg lg:block lg:w-6/12'>
                             <div className='relative z-10 m-12 text-left '>
                                 <h2
                                     className='text-lg font-bold tracking-tighter text-black uppercase transition duration-500 ease-in-out transform hover:text-lightBlack-500 dark:text-lightBlue-400'>
@@ -23,7 +23,7 @@ const ForgotPasswordForm = ({ onSubmit, onFieldChanged, obj, status }) => {
                             </div>
                         </div>
                         <div
-                            className='w-full px-8 py-24 bg-white border-gray-100 rounded-lg lg:w-8/12 lg:px-24 lg:py-4 lg:rounded-l-none s'>
+                            className='w-full px-8 py-24 border-gray-100 rounded-lg lg:w-8/12 lg:px-24 lg:py-4 lg:rounded-l-none s'>
                             <div className='relative z-10 text-left '>
                                 <form className='mt-6' onSubmit={onSubmit}>
                                     <div className='mt-6'>

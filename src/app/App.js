@@ -39,6 +39,12 @@ const Resume = lazy(() => import('../Resumes').then(module => ({
   default: module.Resume
 })));
 
+const Home = lazy(() => import('../Home').then(module => (
+  {
+    default: module.Home
+  }
+)))
+
 library.add(fab)
 
 function App() {
@@ -53,7 +59,7 @@ function App() {
         <main>
           {notificationContext.notification.message.length !== 0 &&
             <div className='md:w-2/4 mx-auto'>
-              <div className='rounded-xl bg-secondary text-center m-2.5 p-2.5 text-red bg-white'>
+              <div className='rounded-xl bg-secondary text-center m-2.5 p-2.5 text-red'>
                 {notificationContext.notification.message}
               </div>
             </div>
@@ -68,6 +74,7 @@ function App() {
               <ProtectedRoute path='/resumes/new' component={ResumeForm} />
               <ProtectedRoute path='/resumes/:id' component={Resume} />
               <ProtectedRoute path='/resumes' component={ResumeList} />
+              <Route path='/' component={Home} />
             </Switch>
           </Suspense>
         </main>
